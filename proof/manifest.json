@@ -1,0 +1,23 @@
+{
+  "cliVersion": "0.3.117",
+  "currentStep": "proof-01-react-component-system",
+  "expectedTags": [
+    "proof-01-react-component-system"
+  ],
+  "expectations": {
+    "noTopo": true,
+    "reactApp": true
+  },
+  "requiredArtifacts": [
+    {
+      "path": "proof/artifacts/step-01-react-component-system/no-topo.json",
+      "json": true,
+      "requiredKeys": ["topoExists", "reason"]
+    },
+    {
+      "path": "proof/artifacts/step-01-react-component-system/component-system.md",
+      "contains": ["# Step 01 Component System", "Acme Operations UI", "acme.dataGrid"]
+    }
+  ]
+}
+

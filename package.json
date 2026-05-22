@@ -1,0 +1,22 @@
+{
+  "name": "topogram-proof-operations-design-review",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Designer-readable Topogram work-map proof for an operations SaaS dashboard.",
+  "workspaces": [
+    "apps/react-ops"
+  ],
+  "scripts": {
+    "dev:react": "npm --workspace @topogram-proof/react-ops run dev",
+    "build:react": "npm --workspace @topogram-proof/react-ops run build",
+    "test:react": "npm --workspace @topogram-proof/react-ops run test",
+    "proof:check-paths": "node ./scripts/proof-check-paths.mjs",
+    "proof:audit": "node ./scripts/proof-audit.mjs",
+    "proof:generate-artifacts": "node ./scripts/generate-artifacts.mjs",
+    "verify": "node ./scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "@topogram/cli": "0.3.117"
+  }
+}
+

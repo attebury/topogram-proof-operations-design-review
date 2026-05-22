@@ -1,0 +1,7 @@
+node_modules/
+dist/
+apps/*/dist/
+.DS_Store
+*.log
+proof/artifacts/tmp/
+
