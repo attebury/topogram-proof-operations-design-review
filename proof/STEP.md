@@ -1,19 +1,19 @@
-# Step 05: Slice-Guided UI Change
+# Step 06: Designer Closeout
 
-> Use the designer packet and focused slice to make a small maintained React UI change.
+> Close the proof with accepted/deferred review rows, product learning, and agent handoff artifacts.
 
 Status: current
 
 Audience: designers, front-end leads, and coding agents.
 
-Use when: checking whether an agent can change the UI from the work map without reading the whole repo first.
+Use when: deciding whether this proof is useful enough to promote from docs and beta walkthroughs.
 
 ## What Changed
 
-- Added a priority escalation capability and action obligation to Topogram first.
-- Updated the Intake Queue command toolbar binding and widget event contract.
-- Added a maintained React escalation button and polite live-region message.
-- Captured before/after screen slices and a refreshed work-map report.
+- Added a designer review checklist with accepted, deferred, unsupported, and review-needed rows.
+- Captured final designer packet, screen slice, command-toolbar slice, and work-map JSON.
+- Recorded product learning for docs, future CLI patch timing, and possible HTML explorer follow-up.
+- Kept `npm run verify` as the single canonical proof command.
 
 ## Proof
 

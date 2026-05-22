@@ -1,12 +1,13 @@
 {
   "cliVersion": "0.3.117",
-  "currentStep": "proof-05-slice-guided-ui-change",
+  "currentStep": "proof-06-designer-closeout",
   "expectedTags": [
     "proof-01-react-component-system",
     "proof-02-semantic-work-map",
     "proof-03-design-language-component-map",
     "proof-04-designer-report-packet",
-    "proof-05-slice-guided-ui-change"
+    "proof-05-slice-guided-ui-change",
+    "proof-06-designer-closeout"
   ],
   "expectations": {
     "noTopo": false,
@@ -110,6 +111,23 @@
       "path": "proof/artifacts/step-05-slice-guided-ui-change/check.json",
       "json": true,
       "requiredKeys": ["ok", "topogram"]
+    },
+    {
+      "path": "proof/artifacts/step-06-designer-closeout/designer-review-checklist.md",
+      "contains": ["# Designer Review Checklist", "Accepted", "Deferred", "Agent Handoff"]
+    },
+    {
+      "path": "proof/artifacts/step-06-designer-closeout/product-learning.md",
+      "contains": ["# Product Learning", "What Worked", "What Needs Follow-Up"]
+    },
+    {
+      "path": "proof/artifacts/step-06-designer-closeout/final-designer-packet.md",
+      "contains": ["Designer Review Packet", "Component Map Matrix Summary", "Agent Handoff Commands"]
+    },
+    {
+      "path": "proof/artifacts/step-06-designer-closeout/final-work-map.json",
+      "json": true,
+      "requiredKeys": ["type", "designer_review", "proof_commands"]
     }
   ]
 }
