@@ -11,7 +11,8 @@ surface surface_operations_ui {
     cap_change_incident_status,
     cap_view_assignment_board,
     cap_view_schedule,
-    cap_acknowledge_alert
+    cap_acknowledge_alert,
+    cap_escalate_priority_alert
   ]
   outputs [semantic_ui]
 
@@ -67,6 +68,7 @@ surface surface_operations_ui {
     message msg_action_bulk_assign_label key "operations.actions.bulk_assign" default "Bulk assign incidents" context action_label action cap_bulk_assign_incidents
     message msg_action_change_status_label key "operations.actions.change_status" default "Change incident status" context action_label action cap_change_incident_status
     message msg_action_acknowledge_alert_label key "operations.actions.acknowledge_alert" default "Acknowledge alert" context action_label action cap_acknowledge_alert
+    message msg_action_escalate_priority_label key "operations.actions.escalate_priority" default "Escalate priority alert" context action_label action cap_escalate_priority_alert
   }
 
   accessibility {
@@ -92,11 +94,12 @@ surface surface_operations_ui {
     action cap_bulk_assign_incidents role button name_from message msg_action_bulk_assign_label keyboard button focus visible live off
     action cap_change_incident_status role button name_from message msg_action_change_status_label keyboard button focus visible live off
     action cap_acknowledge_alert role button name_from message msg_action_acknowledge_alert_label keyboard button focus visible live off
+    action cap_escalate_priority_alert role button name_from message msg_action_escalate_priority_label keyboard button focus visible live polite
   }
 
   screens {
     screen operations_dashboard kind dashboard layout layout_dashboard_overview title "Operations Dashboard" load cap_list_intake_items item_shape shape_output_incident_row primary_action cap_acknowledge_alert loading_state skeleton error_state inline
-    screen intake_queue kind list layout layout_queue_workspace title "Intake Queue" load cap_list_intake_items item_shape shape_output_incident_row detail_capability cap_view_incident_detail primary_action cap_bulk_assign_incidents secondary_action cap_change_incident_status empty_title "No intake work" empty_body "Incoming work that needs triage appears here." loading_state skeleton error_state inline
+    screen intake_queue kind list layout layout_queue_workspace title "Intake Queue" load cap_list_intake_items item_shape shape_output_incident_row detail_capability cap_view_incident_detail primary_action cap_bulk_assign_incidents secondary_action cap_escalate_priority_alert empty_title "No intake work" empty_body "Incoming work that needs triage appears here." loading_state skeleton error_state inline
     screen incident_detail kind detail layout layout_incident_detail title "Incident Detail" load cap_view_incident_detail view_shape shape_output_incident_detail primary_action cap_change_incident_status secondary_action cap_bulk_assign_incidents loading_state skeleton error_state inline not_found_state inline
     screen assignment_board kind board layout layout_assignment_board title "Assignment Board" load cap_view_assignment_board item_shape shape_output_incident_row detail_capability cap_view_incident_detail primary_action cap_bulk_assign_incidents loading_state skeleton error_state inline
     screen schedule kind calendar layout layout_schedule_calendar title "Schedule" load cap_view_schedule item_shape shape_output_shift_card loading_state skeleton error_state inline
@@ -119,7 +122,7 @@ surface surface_operations_ui {
     screen operations_dashboard region results widget widget_kpi_summary_cards data items from cap_list_intake_items event card_select navigate intake_queue
     screen operations_dashboard region live_alerts widget widget_alert_banner data alerts from cap_acknowledge_alert event alert_select navigate incident_detail
 
-    screen intake_queue region command_bar widget widget_command_toolbar data actions from cap_bulk_assign_incidents event primary_action action cap_bulk_assign_incidents
+    screen intake_queue region command_bar widget widget_command_toolbar data actions from cap_bulk_assign_incidents event primary_action action cap_bulk_assign_incidents event escalation action cap_escalate_priority_alert
     screen intake_queue region filters widget widget_filter_panel data filters from cap_list_intake_items event filter_change action cap_list_intake_items
     screen intake_queue region results widget widget_data_grid data rows from cap_list_intake_items event row_select navigate incident_detail
     screen intake_queue region assignment_hints widget widget_workload_hint_panel data hints from cap_view_reviewer_workload_hints event assign action cap_bulk_assign_incidents
@@ -154,7 +157,8 @@ surface surface_operations_web_react {
     cap_change_incident_status,
     cap_view_assignment_board,
     cap_view_schedule,
-    cap_acknowledge_alert
+    cap_acknowledge_alert,
+    cap_escalate_priority_alert
   ]
   outputs [semantic_ui, web_app]
 
@@ -180,6 +184,7 @@ surface surface_operations_web_react {
     action cap_bulk_assign_incidents present button
     action cap_change_incident_status present button
     action cap_acknowledge_alert present button
+    action cap_escalate_priority_alert present button
   }
 
   generator_defaults {

@@ -54,6 +54,7 @@ const messages = {
   dataGridLabel: { key: "operations.widgets.data_grid.label", text: "Incident table" },
   filterPanelLabel: { key: "operations.widgets.filter_panel.label", text: "Incident filters" },
   commandToolbarLabel: { key: "operations.widgets.command_toolbar.label", text: "Screen commands" },
+  escalatePriorityLabel: { key: "operations.actions.escalate_priority", text: "Escalate priority alert" },
   workloadHintLabel: { key: "operations.widgets.workload_hints.label", text: "Reviewer workload hints" },
   kpiCardsLabel: { key: "operations.widgets.kpi_cards.label", text: "Operations summary cards" },
   detailPanelLabel: { key: "operations.widgets.detail_panel.label", text: "Incident detail" },
@@ -157,7 +158,7 @@ function Dashboard() {
   const slaRisk = openIncidents.filter((incident) => incident.slaMinutes <= 60);
   return (
     <main className="screen-grid dashboard-screen" {...screenAttrs("operations_dashboard", "layout_dashboard_overview", messages.dashboardTitle)}>
-      <section className="kpi-grid" {...regionAttrs("results", "region_dashboard_summary", "results")} {...widgetAttrs({ widget: "widget_kpi_summary_cards", componentRef: "ops.web.kpiSummaryCards", mapping: "kpi_summary_web", message: messages.kpiCardsLabel, role: "region" })}>
+      <section className="kpi-grid" {...regionAttrs("results", "region_dashboard_summary", "results")} {...widgetAttrs({ widget: "widget_kpi_summary_cards", componentRef: "acme.kpiCards", mapping: "kpi_summary_web", message: messages.kpiCardsLabel, role: "region" })}>
         <MetricCard label="Open incidents" value={openIncidents.length} tone="neutral" />
         <MetricCard label="Critical" value={critical.length} tone="danger" />
         <MetricCard label="Blocked" value={blocked.length} tone="warning" />
@@ -167,7 +168,7 @@ function Dashboard() {
         <PanelHeader title="Highest priority intake" action={<Link to="/intake">View queue</Link>} />
         <IncidentTable incidents={incidents.slice().sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]).slice(0, 5)} />
       </section>
-      <section className="panel" {...regionAttrs("live_alerts", "region_live_alerts", "live_alerts")} {...widgetAttrs({ widget: "widget_alert_banner", componentRef: "ops.web.liveAlertBanner", mapping: "alert_banner_web", message: messages.alertLabel, role: "status", live: "polite" })}>
+      <section className="panel" {...regionAttrs("live_alerts", "region_live_alerts", "live_alerts")} {...widgetAttrs({ widget: "widget_alert_banner", componentRef: "acme.alertBanner", mapping: "alert_banner_web", message: messages.alertLabel, role: "status", live: "polite" })}>
         <PanelHeader title="Live alerts" />
         <div className="alert-list">{alerts.map((alert) => <article className="alert-card" key={alert.id}><strong>{alert.title}</strong><p>{alert.summary}</p><span>{alert.severity}</span></article>)}</div>
       </section>
@@ -182,6 +183,7 @@ function IntakeQueue() {
   const [targetAssignee, setTargetAssignee] = React.useState(assignees[0].id);
   const [assignments, setAssignments] = React.useState<AssignmentOverrides>({});
   const [assignmentMessage, setAssignmentMessage] = React.useState("No assignment changes yet.");
+  const [escalationMessage, setEscalationMessage] = React.useState("No escalation pending.");
   const assignedRows = applyAssignments(incidents, assignments);
   const filtered = assignedRows.filter((incident) => {
     const matchesQuery = (incident.title + " " + incident.location + " " + incident.summary).toLowerCase().includes(query.toLowerCase());
@@ -189,6 +191,8 @@ function IntakeQueue() {
     return matchesQuery && matchesPriority;
   });
   const workloadHints = buildWorkloadHints(assignedRows);
+  const selectedRows = assignedRows.filter((incident) => selectedIds.includes(incident.id));
+  const escalationReady = selectedRows.some((incident) => incident.priority === "critical" || incident.slaMinutes <= 60);
   function toggleIncident(id: string) {
     setSelectedIds((current) => current.includes(id) ? current.filter((entry) => entry !== id) : [...current, id]);
   }
@@ -203,15 +207,22 @@ function IntakeQueue() {
     setAssignmentMessage(selectedIds.length + " incidents assigned to " + assigneeName + ".");
     setSelectedIds([]);
   }
+  function escalatePriorityAlert() {
+    const count = selectedRows.length;
+    if (count === 0) return;
+    const criticalCount = selectedRows.filter((incident) => incident.priority === "critical" || incident.slaMinutes <= 60).length;
+    setEscalationMessage(criticalCount + " priority incidents escalated for live operations review.");
+  }
   return (
     <main className="queue-layout queue-layout-with-hints" {...screenAttrs("intake_queue", "layout_queue_workspace", messages.intakeTitle)}>
-      <aside className="panel filter-panel" {...regionAttrs("filters", "region_filter_panel", "filters")} {...widgetAttrs({ widget: "widget_filter_panel", componentRef: "ops.web.filterPanel", mapping: "filter_panel_web", message: messages.filterPanelLabel, role: "search", keyboardModel: "form" })}>
+      <aside className="panel filter-panel" {...regionAttrs("filters", "region_filter_panel", "filters")} {...widgetAttrs({ widget: "widget_filter_panel", componentRef: "acme.filterRail", mapping: "filter_panel_web", message: messages.filterPanelLabel, role: "search", keyboardModel: "form" })}>
         <PanelHeader title="Filters" />
         <label>Search<input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Incident, location, team" /></label>
         <label>Priority<select value={priority} onChange={(event) => setPriority(event.target.value as IncidentPriority | "all")}><option value="all">All priorities</option><option value="critical">Critical</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></label>
       </aside>
       <section className="panel queue-panel" {...regionAttrs("results", "region_work_queue", "results")}>
-        <CommandToolbar label={filtered.length + " results - " + selectedIds.length + " selected"} />
+        <CommandToolbar label={filtered.length + " results - " + selectedIds.length + " selected"} escalationReady={escalationReady} onEscalate={escalatePriorityAlert} />
+        <div className="escalation-alert" role="status" aria-live="polite" data-topogram-action="cap_escalate_priority_alert" data-topogram-message-key={messages.escalatePriorityLabel.key}>{escalationMessage}</div>
         <IncidentTable incidents={filtered} selectable selectedIds={selectedIds} onToggle={toggleIncident} />
       </section>
       <WorkloadHintPanel hints={workloadHints} targetAssignee={targetAssignee} setTargetAssignee={setTargetAssignee} selectedCount={selectedIds.length} onAssign={assignSelected} assignmentMessage={assignmentMessage} />
@@ -225,10 +236,10 @@ function IncidentDetail() {
   const updates = statusUpdates.filter((update) => update.incidentId === incident.id);
   return (
     <main className="detail-layout" {...screenAttrs("incident_detail", "layout_incident_detail", messages.incidentTitle)}>
-      <section className="panel detail-summary" {...regionAttrs("summary", "region_detail_summary", "summary")} {...widgetAttrs({ widget: "widget_detail_panel", componentRef: "ops.web.incidentInspector", mapping: "detail_panel_web", message: messages.detailPanelLabel, role: "region" })}>
+      <section className="panel detail-summary" {...regionAttrs("summary", "region_detail_summary", "summary")} {...widgetAttrs({ widget: "widget_detail_panel", componentRef: "acme.detailPanel", mapping: "detail_panel_web", message: messages.detailPanelLabel, role: "region" })}>
         <Link to="/intake" className="back-link">Back to intake</Link><div className="detail-heading"><div><p className="eyebrow">{incident.id}</p><h2>{incident.title}</h2></div><PriorityPill priority={incident.priority} /></div><p>{incident.summary}</p><dl className="detail-grid"><div><dt>Status</dt><dd><StatusPill status={incident.status} /></dd></div><div><dt>Location</dt><dd>{incident.location}</dd></div><div><dt>Team</dt><dd>{incident.team}</dd></div><div><dt>Assignee</dt><dd>{incident.assignee}</dd></div><div><dt>SLA</dt><dd>{incident.slaMinutes} minutes</dd></div></dl>
       </section>
-      <section className="panel timeline-panel" {...regionAttrs("timeline", "region_activity_timeline", "timeline")} {...widgetAttrs({ widget: "widget_activity_timeline", componentRef: "ops.web.activityTimeline", mapping: "activity_timeline_web", message: messages.timelineLabel, role: "list" })}>
+      <section className="panel timeline-panel" {...regionAttrs("timeline", "region_activity_timeline", "timeline")} {...widgetAttrs({ widget: "widget_activity_timeline", componentRef: "acme.timeline", mapping: "activity_timeline_web", message: messages.timelineLabel, role: "list" })}>
         <PanelHeader title="Timeline" /><ol className="timeline">{updates.map((update) => <li key={update.id}><span>{update.time}</span><strong>{update.label}</strong><p>{update.note}</p></li>)}</ol>
       </section>
     </main>
@@ -237,7 +248,7 @@ function IncidentDetail() {
 
 function AssignmentBoard() {
   return (
-    <main className="board-screen" {...screenAttrs("assignment_board", "layout_assignment_board", messages.assignmentTitle)} {...regionAttrs("board", "region_assignment_board", "board")} {...widgetAttrs({ widget: "widget_status_board", componentRef: "ops.web.assignmentBoard", mapping: "status_board_web", message: messages.statusBoardLabel, role: "grid", keyboardModel: "roving_tabindex", focusModel: "roving_tabindex" })}>
+    <main className="board-screen" {...screenAttrs("assignment_board", "layout_assignment_board", messages.assignmentTitle)} {...regionAttrs("board", "region_assignment_board", "board")} {...widgetAttrs({ widget: "widget_status_board", componentRef: "acme.statusBoard", mapping: "status_board_web", message: messages.statusBoardLabel, role: "grid", keyboardModel: "roving_tabindex", focusModel: "roving_tabindex" })}>
       {assignees.map((assignee) => { const assigned = incidents.filter((incident) => incident.assignee === assignee.name && incident.status !== "resolved"); return <section className="panel board-column" key={assignee.id}><PanelHeader title={assignee.name} action={<span>{assigned.length} active</span>} /><p className="muted">{assignee.role} - {assignee.capacity} capacity</p>{assigned.map((incident) => <Link className="incident-card" to={"/incidents/" + incident.id} key={incident.id}><PriorityPill priority={incident.priority} /><strong>{incident.title}</strong><span>{incident.location}</span></Link>)}</section>; })}
     </main>
   );
@@ -245,7 +256,7 @@ function AssignmentBoard() {
 
 function Schedule() {
   return (
-    <main className="panel" {...screenAttrs("schedule", "layout_schedule_calendar", messages.scheduleTitle)} {...regionAttrs("calendar", "region_schedule_calendar", "calendar")} {...widgetAttrs({ widget: "widget_schedule_calendar", componentRef: "ops.web.scheduleCalendar", mapping: "schedule_calendar_web", message: messages.scheduleLabel, role: "grid", keyboardModel: "arrow_keys", focusModel: "roving_tabindex" })}>
+    <main className="panel" {...screenAttrs("schedule", "layout_schedule_calendar", messages.scheduleTitle)} {...regionAttrs("calendar", "region_schedule_calendar", "calendar")} {...widgetAttrs({ widget: "widget_schedule_calendar", componentRef: "acme.scheduleCalendar", mapping: "schedule_calendar_web", message: messages.scheduleLabel, role: "grid", keyboardModel: "arrow_keys", focusModel: "roving_tabindex" })}>
       <PanelHeader title="Field Schedule" /><div className="schedule-grid">{shifts.map((shift) => <article className="shift-card" key={shift.id}><span>{shift.window}</span><strong>{shift.team}</strong><p>{shift.coverage}</p></article>)}</div>
     </main>
   );
@@ -253,7 +264,7 @@ function Schedule() {
 
 function Settings() {
   return (
-    <main className="panel settings-panel" {...screenAttrs("settings", "layout_settings_page", messages.settingsTitle)} {...regionAttrs("summary", "region_settings_panel", "summary")} {...widgetAttrs({ widget: "widget_settings_panel", componentRef: "ops.web.settingsPanel", mapping: "settings_panel_web", message: messages.settingsLabel, role: "form", keyboardModel: "form" })}>
+    <main className="panel settings-panel" {...screenAttrs("settings", "layout_settings_page", messages.settingsTitle)} {...regionAttrs("summary", "region_settings_panel", "summary")} {...widgetAttrs({ widget: "widget_settings_panel", componentRef: "acme.settingsPanel", mapping: "settings_panel_web", message: messages.settingsLabel, role: "form", keyboardModel: "form" })}>
       <PanelHeader title="Preferences" /><div className="settings-grid"><label><input type="checkbox" defaultChecked /> Show SLA risk on queue rows</label><label><input type="checkbox" defaultChecked /> Use compact density for operations screens</label><label><input type="checkbox" /> Announce new critical alerts with a live region</label></div>
     </main>
   );
@@ -261,7 +272,7 @@ function Settings() {
 
 function WorkloadHintPanel({ hints, targetAssignee, setTargetAssignee, selectedCount, onAssign, assignmentMessage }: { hints: WorkloadHint[]; targetAssignee: string; setTargetAssignee: (value: string) => void; selectedCount: number; onAssign: () => void; assignmentMessage: string }) {
   return (
-    <aside className="panel workload-hint-panel" data-topogram-capability="cap_view_reviewer_workload_hints" {...regionAttrs("assignment_hints", "region_assignment_hints", "assignment_hints")} {...widgetAttrs({ widget: "widget_workload_hint_panel", componentRef: "ops.web.workloadHintPanel", mapping: "workload_hint_panel_web", message: messages.workloadHintLabel, role: "region", live: "polite", keyboardModel: "form" })}>
+    <aside className="panel workload-hint-panel" data-topogram-capability="cap_view_reviewer_workload_hints" {...regionAttrs("assignment_hints", "region_assignment_hints", "assignment_hints")} {...widgetAttrs({ widget: "widget_workload_hint_panel", componentRef: "acme.workloadHints", mapping: "workload_hint_panel_web", message: messages.workloadHintLabel, role: "region", live: "polite", keyboardModel: "form" })}>
       <PanelHeader title="Assignment guidance" action={<span>{selectedCount} selected</span>} />
       <label className="assignment-target">Assign to<select value={targetAssignee} onChange={(event) => setTargetAssignee(event.target.value)}>{hints.map((hint) => <option value={hint.assigneeId} key={hint.assigneeId}>{hint.name}</option>)}</select></label>
       <button className="primary-action" type="button" data-topogram-action="cap_bulk_assign_incidents" onClick={onAssign} disabled={selectedCount === 0}>Assign selected</button>
@@ -271,8 +282,8 @@ function WorkloadHintPanel({ hints, targetAssignee, setTargetAssignee, selectedC
   );
 }
 
-function CommandToolbar({ label }: { label: string }) {
-  return <div className="command-toolbar" {...regionAttrs("command_bar", "region_command_bar", "command_bar")} {...widgetAttrs({ widget: "widget_command_toolbar", componentRef: "ops.web.commandToolbar", mapping: "command_toolbar_web", message: messages.commandToolbarLabel, role: "toolbar" })}><PanelHeader title="Intake Queue" action={<span>{label}</span>} /></div>;
+function CommandToolbar({ label, escalationReady = false, onEscalate }: { label: string; escalationReady?: boolean; onEscalate?: () => void }) {
+  return <div className="command-toolbar" {...regionAttrs("command_bar", "region_command_bar", "command_bar")} {...widgetAttrs({ widget: "widget_command_toolbar", componentRef: "acme.commandBar", mapping: "command_toolbar_web", message: messages.commandToolbarLabel, role: "toolbar" })}><PanelHeader title="Intake Queue" action={<span>{label}</span>} />{onEscalate ? <button className="secondary-action" type="button" data-topogram-action="cap_escalate_priority_alert" onClick={onEscalate} disabled={!escalationReady}>{messages.escalatePriorityLabel.text}</button> : null}</div>;
 }
 
 function MetricCard({ label, value, tone }: { label: string; value: number; tone: "neutral" | "danger" | "warning" | "accent" }) {
@@ -284,7 +295,7 @@ function PanelHeader({ title, action }: { title: string; action?: React.ReactNod
 }
 
 function IncidentTable({ incidents: rows, selectable = false, selectedIds = [], onToggle }: { incidents: Incident[]; selectable?: boolean; selectedIds?: string[]; onToggle?: (id: string) => void }) {
-  return <div className="table-wrap" {...widgetAttrs({ widget: "widget_data_grid", componentRef: "ops.web.incidentDataGrid", mapping: "data_grid_web_wide", message: messages.dataGridLabel, role: "grid", keyboardModel: "data_grid", focusModel: "roving_tabindex" })}><table><thead><tr>{selectable ? <th className="select-column">Select</th> : null}<th>Incident</th><th>Priority</th><th>Status</th><th>Assignee</th><th>SLA</th></tr></thead><tbody>{rows.map((incident) => <tr key={incident.id}>{selectable ? <td className="select-column"><input type="checkbox" aria-label={"Select " + incident.title} checked={selectedIds.includes(incident.id)} onChange={() => onToggle?.(incident.id)} /></td> : null}<td><Link to={"/incidents/" + incident.id}>{incident.title}</Link><span>{incident.location}</span></td><td><PriorityPill priority={incident.priority} /></td><td><StatusPill status={incident.status} /></td><td>{incident.assignee}</td><td>{incident.slaMinutes}m</td></tr>)}</tbody></table></div>;
+  return <div className="table-wrap" {...widgetAttrs({ widget: "widget_data_grid", componentRef: "acme.dataGrid", mapping: "data_grid_web_wide", message: messages.dataGridLabel, role: "grid", keyboardModel: "data_grid", focusModel: "roving_tabindex" })}><table><thead><tr>{selectable ? <th className="select-column">Select</th> : null}<th>Incident</th><th>Priority</th><th>Status</th><th>Assignee</th><th>SLA</th></tr></thead><tbody>{rows.map((incident) => <tr key={incident.id}>{selectable ? <td className="select-column"><input type="checkbox" aria-label={"Select " + incident.title} checked={selectedIds.includes(incident.id)} onChange={() => onToggle?.(incident.id)} /></td> : null}<td><Link to={"/incidents/" + incident.id}>{incident.title}</Link><span>{incident.location}</span></td><td><PriorityPill priority={incident.priority} /></td><td><StatusPill status={incident.status} /></td><td>{incident.assignee}</td><td>{incident.slaMinutes}m</td></tr>)}</tbody></table></div>;
 }
 
 function PriorityPill({ priority }: { priority: IncidentPriority }) {

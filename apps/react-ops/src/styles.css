@@ -90,6 +90,10 @@ dd { margin: 4px 0 0; }
 
 .queue-layout-with-hints { grid-template-columns: 260px minmax(0, 1fr) 300px; }
 .command-toolbar { margin-bottom: 12px; }
+.command-toolbar .secondary-action { margin-top: 10px; }
+.secondary-action { border: 1px solid var(--warning); border-radius: 8px; padding: 9px 12px; background: #fff7e6; color: var(--warning); font-weight: 800; cursor: pointer; }
+.secondary-action:disabled { border-color: var(--line); background: var(--surface-muted); color: var(--text-muted); cursor: not-allowed; }
+.escalation-alert { margin-bottom: 12px; border: 1px solid rgba(154, 91, 0, 0.35); border-radius: 8px; padding: 10px 12px; background: #fff7e6; color: var(--warning); font-weight: 700; }
 .workload-hint-panel { display: grid; gap: 14px; align-self: start; }
 .assignment-target { display: grid; gap: 7px; color: var(--text-muted); font-weight: 700; }
 .assignment-target select { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: var(--surface-muted); }

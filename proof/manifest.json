@@ -1,11 +1,12 @@
 {
   "cliVersion": "0.3.117",
-  "currentStep": "proof-04-designer-report-packet",
+  "currentStep": "proof-05-slice-guided-ui-change",
   "expectedTags": [
     "proof-01-react-component-system",
     "proof-02-semantic-work-map",
     "proof-03-design-language-component-map",
-    "proof-04-designer-report-packet"
+    "proof-04-designer-report-packet",
+    "proof-05-slice-guided-ui-change"
   ],
   "expectations": {
     "noTopo": false,
@@ -91,6 +92,24 @@
     {
       "path": "proof/artifacts/step-04-designer-report-packet/screen-slice.md",
       "contains": ["Agent Guidance", "UI Work Map", "Design Review"]
+    },
+    {
+      "path": "proof/artifacts/step-05-slice-guided-ui-change/slice-guided-change.md",
+      "contains": ["# Step 05 Slice-Guided UI Change", "cap_escalate_priority_alert", "React Second"]
+    },
+    {
+      "path": "proof/artifacts/step-05-slice-guided-ui-change/after-screen-slice.md",
+      "contains": ["cap_escalate_priority_alert", "UI Work Map", "Design Review"]
+    },
+    {
+      "path": "proof/artifacts/step-05-slice-guided-ui-change/work-map.json",
+      "json": true,
+      "requiredKeys": ["type", "designer_review", "proof_commands"]
+    },
+    {
+      "path": "proof/artifacts/step-05-slice-guided-ui-change/check.json",
+      "json": true,
+      "requiredKeys": ["ok", "topogram"]
     }
   ]
 }

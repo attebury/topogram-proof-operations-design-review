@@ -75,3 +75,13 @@ capability cap_acknowledge_alert {
   output [shape_output_alert_banner]
   status active
 }
+
+capability cap_escalate_priority_alert {
+  name "Escalate Priority Alert"
+  description "Surfaces a high-priority escalation alert when selected intake items need immediate operations review."
+  actors [actor_operations_lead, actor_ui_agent]
+  reads [entity_incident, entity_alert]
+  input [shape_input_bulk_assign]
+  output [shape_output_alert_banner]
+  status active
+}

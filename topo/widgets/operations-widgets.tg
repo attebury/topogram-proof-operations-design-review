@@ -114,6 +114,7 @@ widget widget_command_toolbar {
 
   events {
     primary_action shape_output_incident_row
+    escalation shape_output_alert_banner
   }
 
   behavior [bulk_action keyboard_navigation]

@@ -1,19 +1,19 @@
-# Step 04: Designer Report Packet
+# Step 05: Slice-Guided UI Change
 
-> Package the work map into a designer-readable Markdown packet with drill-down JSON artifacts.
+> Use the designer packet and focused slice to make a small maintained React UI change.
 
 Status: current
 
 Audience: designers, front-end leads, and coding agents.
 
-Use when: reviewing the product-facing packet a designer or front-end lead would read first.
+Use when: checking whether an agent can change the UI from the work map without reading the whole repo first.
 
 ## What Changed
 
-- Emitted `work-map.md` as the main designer review packet.
-- Captured design coverage Markdown/JSON, UI realization JSON, and compact screen/widget slices.
-- Verified the packet shows screens, layouts, regions, widget bindings, component refs, style intent, token/a11y/i18n gaps, review rows, and exact agent handoff commands.
-- Kept `.tg` as the source of truth while making Markdown the first review surface.
+- Added a priority escalation capability and action obligation to Topogram first.
+- Updated the Intake Queue command toolbar binding and widget event contract.
+- Added a maintained React escalation button and polite live-region message.
+- Captured before/after screen slices and a refreshed work-map report.
 
 ## Proof
 
