@@ -16,4 +16,4 @@ Use when: reviewing what each proof checkpoint demonstrates.
 | 04 | proof-04-designer-report-packet | Polished Markdown designer packet plus JSON work-map/report artifacts. |
 | 05 | proof-05-slice-guided-ui-change | Small UI change guided by Topogram slices and designer packet. |
 | 06 | proof-06-designer-closeout | Accepted/deferred review checklist, product learning, and agent handoff artifacts. |
-
+| 07 | proof-07-published-cli-refresh | Published `@topogram/cli@0.3.118` regenerates the designer packet artifacts. |

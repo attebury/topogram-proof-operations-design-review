@@ -1,18 +1,18 @@
-# Step 06: Designer Closeout
+# Step 07: Published CLI Refresh
 
-> Close the proof with accepted/deferred review rows, product learning, and agent handoff artifacts.
+> Refresh the proof artifacts with published `@topogram/cli@0.3.118`.
 
 Status: current
 
-Audience: designers, front-end leads, and coding agents.
+Audience: designers, front-end leads, maintainers, and coding agents.
 
-Use when: deciding whether this proof is useful enough to promote from docs and beta walkthroughs.
+Use when: confirming the designer packet no longer depends on local Topogram CLI output.
 
 ## What Changed
 
-- Added a designer review checklist with accepted, deferred, unsupported, and review-needed rows.
-- Captured final designer packet, screen slice, command-toolbar slice, and work-map JSON.
-- Recorded product learning for docs, future CLI patch timing, and possible HTML explorer follow-up.
+- Updated the proof baseline to `@topogram/cli@0.3.118`.
+- Regenerated work-map, design coverage, realization, screen slice, and widget slice artifacts from the published package.
+- Kept the previous designer closeout artifacts as the accepted/deferred review record.
 - Kept `npm run verify` as the single canonical proof command.
 
 ## Proof

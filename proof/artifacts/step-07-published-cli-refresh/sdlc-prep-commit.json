@@ -1,0 +1,58 @@
+{
+  "changedFiles": [
+    "package-lock.json",
+    "package.json",
+    "proof/manifest.json",
+    "topogram-cli.version",
+    "proof/artifacts/current-check.json",
+    "proof/artifacts/current-sdlc-check.json"
+  ],
+  "changedTasks": [],
+  "errors": [],
+  "nextCommands": [
+    "topogram sdlc explain <task-id> --json",
+    "topogram query slice ./topo --task <task-id> --json",
+    "topogram sdlc gate . --base <ref> --head <ref> --require-adopted"
+  ],
+  "ok": true,
+  "openTasks": [],
+  "projectRoot": "<repo>",
+  "staleWork": {
+    "breaches": [],
+    "nextCommands": [
+      "topogram query sdlc-claimed ./topo --json",
+      "topogram query sdlc-proof-gaps ./topo --json",
+      "topogram sdlc prep commit . --json"
+    ],
+    "now": "2026-05-22T13:03:56.028Z",
+    "ok": true,
+    "policy": {
+      "configured": false,
+      "staleWork": {
+        "claimedDays": null,
+        "inProgressDays": null
+      },
+      "wipLimits": {
+        "maxClaimedTasksPerActor": null,
+        "maxInProgressTasks": null
+      }
+    },
+    "stale": {
+      "claimed": [],
+      "in_progress": [],
+      "missing_history": []
+    },
+    "type": "sdlc_stale_work_query",
+    "version": 1,
+    "wip": {
+      "by_actor": [],
+      "claimed_count": 0,
+      "in_progress_count": 0
+    }
+  },
+  "taskFiles": [],
+  "topogramRoot": "<workspace>",
+  "type": "sdlc_commit_prep",
+  "version": "1",
+  "warnings": []
+}

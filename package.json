@@ -16,7 +16,6 @@
     "verify": "node ./scripts/verify.mjs"
   },
   "devDependencies": {
-    "@topogram/cli": "0.3.117"
+    "@topogram/cli": "0.3.118"
   }
 }
-

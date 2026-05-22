@@ -1,13 +1,14 @@
 {
-  "cliVersion": "0.3.117",
-  "currentStep": "proof-06-designer-closeout",
+  "cliVersion": "0.3.118",
+  "currentStep": "proof-07-published-cli-refresh",
   "expectedTags": [
     "proof-01-react-component-system",
     "proof-02-semantic-work-map",
     "proof-03-design-language-component-map",
     "proof-04-designer-report-packet",
     "proof-05-slice-guided-ui-change",
-    "proof-06-designer-closeout"
+    "proof-06-designer-closeout",
+    "proof-07-published-cli-refresh"
   ],
   "expectations": {
     "noTopo": false,
@@ -128,6 +129,38 @@
       "path": "proof/artifacts/step-06-designer-closeout/final-work-map.json",
       "json": true,
       "requiredKeys": ["type", "designer_review", "proof_commands"]
+    },
+    {
+      "path": "proof/artifacts/step-07-published-cli-refresh/version.json",
+      "json": true,
+      "requiredKeys": ["packageName", "version"]
+    },
+    {
+      "path": "proof/artifacts/step-07-published-cli-refresh/check.json",
+      "json": true,
+      "requiredKeys": ["ok", "topogram"]
+    },
+    {
+      "path": "proof/artifacts/step-07-published-cli-refresh/work-map.md",
+      "contains": ["Designer Review Packet", "Screen Inventory", "Agent Handoff Commands"]
+    },
+    {
+      "path": "proof/artifacts/step-07-published-cli-refresh/work-map.json",
+      "json": true,
+      "requiredKeys": ["type", "designer_review", "proof_commands"]
+    },
+    {
+      "path": "proof/artifacts/step-07-published-cli-refresh/ui-design-coverage.md",
+      "contains": ["# UI Design Coverage", "Design Matrix", "Review Work"]
+    },
+    {
+      "path": "proof/artifacts/step-07-published-cli-refresh/ui-realization-report.json",
+      "json": true,
+      "requiredKeys": ["type", "summary"]
+    },
+    {
+      "path": "proof/artifacts/step-07-published-cli-refresh/screen-slice.md",
+      "contains": ["Agent Guidance", "UI Work Map", "Design Review"]
     }
   ]
 }
