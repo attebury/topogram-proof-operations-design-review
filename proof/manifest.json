@@ -1,9 +1,10 @@
 {
   "cliVersion": "0.3.117",
-  "currentStep": "proof-02-semantic-work-map",
+  "currentStep": "proof-03-design-language-component-map",
   "expectedTags": [
     "proof-01-react-component-system",
-    "proof-02-semantic-work-map"
+    "proof-02-semantic-work-map",
+    "proof-03-design-language-component-map"
   ],
   "expectations": {
     "noTopo": false,
@@ -46,6 +47,28 @@
       "path": "proof/artifacts/step-02-semantic-work-map/widget-slice.json",
       "json": true,
       "requiredKeys": ["type", "ui_agent_packet"]
+    },
+    {
+      "path": "proof/artifacts/step-03-design-language-component-map/ui-design-coverage.md",
+      "contains": ["# UI Design Coverage", "Design Matrix", "acme.dataGrid"]
+    },
+    {
+      "path": "proof/artifacts/step-03-design-language-component-map/work-map.md",
+      "contains": ["Designer Review Packet", "Component Map Matrix Summary", "Style, Token, A11y, And I18n Gaps"]
+    },
+    {
+      "path": "proof/artifacts/step-03-design-language-component-map/work-map.json",
+      "json": true,
+      "requiredKeys": ["type", "designer_review", "component_maps"]
+    },
+    {
+      "path": "proof/artifacts/step-03-design-language-component-map/ui-realization-report.json",
+      "json": true,
+      "requiredKeys": ["type", "summary"]
+    },
+    {
+      "path": "proof/artifacts/step-03-design-language-component-map/widget-slice.md",
+      "contains": ["Design Review", "widget_data_grid"]
     }
   ]
 }

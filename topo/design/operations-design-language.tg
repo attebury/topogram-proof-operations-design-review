@@ -1,0 +1,23 @@
+design_language design_operations_product_ui {
+  name "Operations Product UI"
+  description "Semantic design language for the operations design-review proof across maintained React web and future platform mappings."
+  platforms [web, ios, android]
+  surfaces [surface_operations_web_react]
+  library acme_operations_ui
+  package "@acme/operations-ui"
+
+  token_mappings {
+    color_role primary token "ops.color.brand.primary"
+    color_role danger token "ops.color.status.critical"
+    color_role warning token "ops.color.status.warning"
+    color_role success token "ops.color.status.success"
+    color_role surface token "ops.color.surface.base"
+    color_role text token "ops.color.text.primary"
+    typography_role body token "ops.type.body.compact"
+    typography_role heading token "ops.type.heading.section"
+    action_role primary token "ops.action.primary"
+    action_role destructive token "ops.action.destructive"
+  }
+
+  status active
+}

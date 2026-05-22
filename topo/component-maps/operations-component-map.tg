@@ -1,0 +1,263 @@
+component_map component_map_operations_widgets {
+  name "Operations Widget Component Map"
+  description "Maps semantic operations widgets to stable component refs across web, iOS, and Android."
+  design_language design_operations_product_ui
+  status active
+
+  widget_mapping {
+    id data_grid_web_wide
+    widget widget_data_grid
+    platform web
+    viewport wide
+    component_ref "acme.dataGrid"
+    pattern data_grid_view
+    density compact
+    state_coverage [loading, empty, error]
+    role_contexts [dispatcher, reviewer]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    review_notes "Primary maintained React table for wide operations workspaces. Bulk selection is visible; keyboard sorting still needs implementation proof."
+    status rendered
+    behaviors_rendered [selection, filtering]
+    behaviors_contract_only [sorting, keyboard_navigation]
+  }
+
+  widget_mapping {
+    id data_grid_web_narrow
+    widget widget_data_grid
+    platform web
+    viewport narrow
+    component_ref "acme.cardList"
+    pattern resource_cards
+    density comfortable
+    state_coverage [empty]
+    role_contexts [dispatcher]
+    theme_contexts [light]
+    locale_contexts [default_locale]
+    review_notes "Narrow web carries the queue contract as cards, but loading and error states are still review work."
+    status contract_only
+    behaviors_rendered [selection]
+    behaviors_contract_only [filtering, sorting]
+  }
+
+  widget_mapping {
+    id data_grid_ios
+    widget widget_data_grid
+    platform ios
+    viewport any
+    component_ref "acme.ios.incidentList"
+    pattern resource_cards
+    density comfortable
+    state_coverage [loading, empty]
+    role_contexts [dispatcher]
+    theme_contexts [system]
+    locale_contexts [default_locale]
+    review_notes "Native iOS realization is intentionally implementation-owned in this web-first proof."
+    status implementation_owned
+    behaviors_rendered [selection]
+    behaviors_implementation_owned [filtering, sorting, keyboard_navigation]
+  }
+
+  widget_mapping {
+    id data_grid_android
+    widget widget_data_grid
+    platform android
+    viewport any
+    component_ref "acme.android.incidentRecycler"
+    pattern resource_cards
+    density comfortable
+    state_coverage [loading]
+    role_contexts [dispatcher]
+    theme_contexts [system]
+    locale_contexts [default_locale]
+    review_notes "Android queue realization is deliberately unsupported until a native component proof exists."
+    status unsupported
+    behaviors_unsupported [selection, sorting, filtering, keyboard_navigation]
+  }
+
+  widget_mapping {
+    id command_toolbar_web
+    widget widget_command_toolbar
+    platform web
+    viewport wide
+    component_ref "acme.commandBar"
+    pattern action_bar
+    density compact
+    state_coverage [loading, error]
+    role_contexts [dispatcher, reviewer]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    review_notes "Rendered wide web command surface; disabled state requires visual review."
+    status rendered
+    behaviors_rendered [bulk_action]
+    behaviors_contract_only [keyboard_navigation]
+  }
+
+  widget_mapping {
+    id command_toolbar_mobile
+    widget widget_command_toolbar
+    platform web
+    viewport narrow
+    component_ref "acme.mobileCommandBar"
+    pattern action_bar
+    density comfortable
+    state_coverage [empty]
+    role_contexts [dispatcher]
+    theme_contexts [light]
+    locale_contexts [default_locale]
+    review_notes "Mobile web action bar is contract-only until the responsive shell is implemented."
+    status contract_only
+    behaviors_contract_only [bulk_action, keyboard_navigation]
+  }
+
+  widget_mapping {
+    id detail_panel_web
+    widget widget_detail_panel
+    platform web
+    viewport wide
+    component_ref "acme.detailPanel"
+    pattern inspector_pane
+    density compact
+    state_coverage [loading, error]
+    role_contexts [reviewer]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    status rendered
+  }
+
+  widget_mapping {
+    id status_board_web
+    widget widget_status_board
+    platform web
+    viewport wide
+    component_ref "acme.statusBoard"
+    pattern board_view
+    density compact
+    state_coverage [loading, empty]
+    role_contexts [dispatcher]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    review_notes "Drag/drop remains implementation-owned because this proof does not execute browser interactions."
+    status rendered
+    behaviors_rendered [selection]
+    behaviors_implementation_owned [drag_drop]
+  }
+
+  widget_mapping {
+    id schedule_calendar_web
+    widget widget_schedule_calendar
+    platform web
+    viewport wide
+    component_ref "acme.scheduleCalendar"
+    pattern calendar_view
+    density comfortable
+    state_coverage [loading]
+    role_contexts [dispatcher]
+    theme_contexts [light]
+    locale_contexts [default_locale]
+    review_notes "Missing empty and error states are intentional design review gaps."
+    status rendered
+    behaviors_rendered [selection]
+  }
+
+  widget_mapping {
+    id alert_banner_web
+    widget widget_alert_banner
+    platform web
+    viewport wide
+    component_ref "acme.alertBanner"
+    pattern activity_feed
+    density compact
+    state_coverage [success]
+    role_contexts [dispatcher]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    review_notes "Live update visibility is modeled; behavioral live-region audit remains later work."
+    status rendered
+    behaviors_rendered [realtime_update]
+  }
+
+  widget_mapping {
+    id kpi_summary_web
+    widget widget_kpi_summary_cards
+    platform web
+    viewport wide
+    component_ref "acme.kpiCards"
+    pattern summary_stats
+    density compact
+    state_coverage [loading, empty, error]
+    role_contexts [dispatcher]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    review_notes "Maintained React dashboard summary card grid carries current open, critical, blocked, and SLA-risk counts."
+    status rendered
+    behaviors_rendered [selection]
+  }
+
+  widget_mapping {
+    id filter_panel_web
+    widget widget_filter_panel
+    platform web
+    viewport wide
+    component_ref "acme.filterRail"
+    pattern filter_panel
+    density compact
+    state_coverage [loading, empty, error]
+    role_contexts [dispatcher]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    review_notes "Maintained React filter panel uses local mock data and proves search/priority filtering in source."
+    status rendered
+    behaviors_rendered [filtering, search]
+  }
+
+  widget_mapping {
+    id activity_timeline_web
+    widget widget_activity_timeline
+    platform web
+    viewport wide
+    component_ref "acme.timeline"
+    pattern timeline_view
+    density compact
+    state_coverage [loading, empty, error]
+    role_contexts [reviewer]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    status rendered
+  }
+
+  widget_mapping {
+    id settings_panel_web
+    widget widget_settings_panel
+    platform web
+    viewport wide
+    component_ref "acme.settingsPanel"
+    pattern settings_section
+    density comfortable
+    state_coverage [loading, empty, error]
+    role_contexts [dispatcher]
+    theme_contexts [light]
+    locale_contexts [default_locale]
+    review_notes "Settings are maintained React controls in this proof; persistence is out of scope."
+    status rendered
+    behaviors_rendered [keyboard_navigation]
+  }
+
+
+  widget_mapping {
+    id workload_hint_panel_web
+    widget widget_workload_hint_panel
+    platform web
+    viewport wide
+    component_ref "acme.workloadHints"
+    pattern resource_cards
+    density compact
+    state_coverage [loading, empty, error]
+    role_contexts [dispatcher]
+    theme_contexts [light, dark]
+    locale_contexts [default_locale]
+    review_notes "Maintained React assignment panel guides bulk assignment with workload and capacity hints."
+    status rendered
+    behaviors_rendered [selection, bulk_action]
+  }
+}

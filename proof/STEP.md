@@ -1,19 +1,19 @@
-# Step 02: Semantic Work Map
+# Step 03: Design Language And Component Map
 
-> Add the semantic Topogram work map before design-language and component-map review.
+> Add design-language tokens, style intent, stable component refs, and explicit review rows.
 
 Status: current
 
 Audience: designers, front-end leads, and coding agents.
 
-Use when: inspecting screens, layouts, regions, widgets, messages, accessibility, and slices before component mappings are accepted.
+Use when: reviewing how a designer/front-end lead maps the semantic work map to Acme Operations UI components.
 
 ## What Changed
 
-- Added `topo/` with operations actors, domains, entities, shapes, capabilities, glossary terms, verifications, and SDLC records.
-- Added a `semantic_ui` surface with screens, routes, layouts, regions, widget bindings, messages, and accessibility obligations.
-- Captured work-map JSON/Markdown and focused screen/widget slices as designer/agent review artifacts.
-- Intentionally deferred `design_language` and `component_map` records until Step 03.
+- Added `design_language design_operations_product_ui` for platform scope, token mappings, and Acme Operations UI identity.
+- Added `component_map component_map_operations_widgets` with widget mappings across web, iOS, and Android.
+- Included rendered, contract-only, implementation-owned, unsupported, missing-platform, missing-state, style-ref, token, a11y, and i18n review cases.
+- Captured design coverage, realization report, work-map report, and widget slice artifacts.
 
 ## Proof
 
