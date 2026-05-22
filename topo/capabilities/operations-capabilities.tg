@@ -1,0 +1,77 @@
+capability cap_list_intake_items {
+  name "List Intake Items"
+  description "Lists mock incidents for the intake queue with query, priority, and status filters."
+  actors [actor_operations_lead, actor_ui_agent]
+  reads [entity_incident, entity_assignee]
+  input [shape_input_list_intake]
+  output [shape_output_incident_row]
+  status active
+}
+
+capability cap_view_incident_detail {
+  name "View Incident Detail"
+  description "Loads the selected mock incident detail and its timeline context."
+  actors [actor_operations_lead, actor_field_coordinator, actor_ui_agent]
+  reads [entity_incident, entity_status_update, entity_assignee]
+  input [shape_output_incident_row]
+  output [shape_output_incident_detail, shape_output_timeline_event]
+  status active
+}
+
+capability cap_view_reviewer_workload_hints {
+  name "View Reviewer Workload Hints"
+  description "Shows reviewer workload hints to guide the slice-guided bulk assignment feature."
+  actors [actor_operations_lead, actor_ui_agent]
+  reads [entity_incident, entity_assignee]
+  input [shape_input_list_intake]
+  output [shape_output_workload_hint]
+  status active
+}
+
+capability cap_bulk_assign_incidents {
+  name "Bulk Assign Incidents"
+  description "Assigns selected mock incidents to an assignee in the slice-guided feature checkpoint."
+  actors [actor_operations_lead, actor_ui_agent]
+  reads [entity_incident, entity_assignee]
+  input [shape_input_bulk_assign]
+  output [shape_output_incident_row]
+  status active
+}
+
+capability cap_change_incident_status {
+  name "Change Incident Status"
+  description "Changes a mock incident status from the detail or queue workflow."
+  actors [actor_operations_lead, actor_field_coordinator, actor_ui_agent]
+  reads [entity_incident]
+  input [shape_output_incident_detail]
+  output [shape_output_incident_detail]
+  status active
+}
+
+capability cap_view_assignment_board {
+  name "View Assignment Board"
+  description "Shows active mock incidents grouped by assignee or unassigned queue."
+  actors [actor_operations_lead, actor_ui_agent]
+  reads [entity_incident, entity_assignee]
+  input [shape_input_list_intake]
+  output [shape_output_incident_row, shape_output_assignee_card]
+  status active
+}
+
+capability cap_view_schedule {
+  name "View Schedule"
+  description "Shows mock shift coverage for field and operations teams."
+  actors [actor_operations_lead, actor_field_coordinator, actor_ui_agent]
+  reads [entity_shift]
+  output [shape_output_shift_card]
+  status active
+}
+
+capability cap_acknowledge_alert {
+  name "Acknowledge Alert"
+  description "Acknowledges a live mock alert in dashboard or global feedback regions."
+  actors [actor_operations_lead, actor_ui_agent]
+  reads [entity_alert]
+  output [shape_output_alert_banner]
+  status active
+}

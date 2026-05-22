@@ -1,0 +1,17 @@
+task task_align_react_app_to_ui_work_map {
+  name "Align React App To UI Work Map"
+  description "Update the maintained React app with Topogram UI markers and capture marker audit, design coverage, realization report, and focused slices as Step 05 proof artifacts."
+  satisfies [req_maintained_react_ui_alignment]
+  acceptance_refs [ac_maintained_react_ui_markers]
+  verification_refs [verification_react_baseline_build, verification_topogram_domain_check, verification_react_ui_marker_audit]
+  affects [cap_list_intake_items, cap_view_incident_detail, cap_view_assignment_board, cap_query_context]
+  blocked_by []
+  disposition active
+  risk_class medium
+  change_type ui
+  priority high
+  work_type implementation
+  claimed_by [actor_ui_agent]
+  status done
+}
+

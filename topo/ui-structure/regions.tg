@@ -1,0 +1,217 @@
+region region_app_header {
+  name "App Header"
+  description "Persistent header for brand identity, current workspace, account controls, and alert entry."
+  kind header
+  pattern app_header
+  placement top
+  density compact
+  style_intent [persistent brand operational]
+  accessibility_obligations [landmark_banner visible_focus]
+  i18n_obligations [brand_label account_action_labels]
+  allowed_widget_patterns [app_header action_bar status_badge]
+  related_terms [term_operations_control_room]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_global_navigation {
+  name "Global Navigation"
+  description "Primary navigation for dashboard, intake, assignments, schedule, and settings workspaces."
+  kind navigation
+  pattern primary_navigation
+  placement shell
+  density comfortable
+  style_intent [persistent orienting scannable]
+  accessibility_obligations [landmark_navigation keyboard_navigation current_page_marker]
+  i18n_obligations [navigation_labels]
+  allowed_widget_patterns [primary_navigation hamburger_drawer]
+  related_terms [term_operations_control_room]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_command_bar {
+  name "Command Bar"
+  description "Screen command area for assignment, refresh, filtering, status changes, and alert acknowledgement."
+  kind toolbar
+  pattern action_bar
+  placement secondary
+  density compact
+  style_intent [actionable scannable priority_ordered]
+  accessibility_obligations [toolbar_label keyboard_navigation visible_focus]
+  i18n_obligations [action_labels]
+  allowed_widget_patterns [action_bar status_badge]
+  related_terms [term_mock_capability]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_filter_panel {
+  name "Filter Panel"
+  description "Filter and search area for queue, assignment, and schedule screens."
+  kind filters
+  pattern filter_panel
+  placement start
+  states [loading empty error]
+  density compact
+  style_intent [collapsible scannable persistent_when_active]
+  accessibility_obligations [labelled_region form_labels keyboard_navigation]
+  i18n_obligations [filter_labels empty_state]
+  allowed_widget_patterns [filter_panel lookup_select search_results]
+  related_terms [term_intake_queue]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_assignment_hints {
+  name "Assignment Hints"
+  description "Supporting assignment guidance region for reviewer workload, capacity, and suggested target selection."
+  kind aside
+  pattern resource_cards
+  placement supporting
+  states [loading empty error]
+  density compact
+  style_intent [decision_support workload_balanced scannable]
+  accessibility_obligations [labelled_region form_labels status_announcements]
+  i18n_obligations [assignee_labels capacity_labels action_labels]
+  allowed_widget_patterns [resource_cards status_badge action_bar]
+  related_terms [term_assignment_board term_intake_queue]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_work_queue {
+  name "Work Queue"
+  description "Primary prioritized incident review area for incoming or active work."
+  kind results
+  pattern data_grid_view
+  placement primary
+  states [loading empty error unauthorized]
+  density comfortable
+  style_intent [prioritized actionable queue_focused]
+  accessibility_obligations [labelled_region keyboard_collection_navigation status_announcements]
+  i18n_obligations [queue_title priority_labels empty_state]
+  allowed_widget_patterns [resource_table data_grid_view resource_cards]
+  related_terms [term_intake_queue term_incident]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_detail_summary {
+  name "Detail Summary"
+  description "Primary detail region for the selected incident and its decision context."
+  kind summary
+  pattern detail_panel
+  placement primary
+  states [loading error not_found unauthorized]
+  density comfortable
+  style_intent [focused readable decision_support]
+  accessibility_obligations [labelled_region heading_order focus_entry]
+  i18n_obligations [field_labels status_labels not_found_state]
+  allowed_widget_patterns [detail_panel status_badge edit_form]
+  related_terms [term_incident]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_activity_timeline {
+  name "Activity Timeline"
+  description "Chronological incident history for status changes, assignments, escalations, and audit notes."
+  kind activity
+  pattern activity_feed
+  placement supporting
+  states [loading empty error]
+  density comfortable
+  style_intent [chronological secondary audit_friendly]
+  accessibility_obligations [labelled_region chronological_order]
+  i18n_obligations [timestamp_labels event_labels empty_state]
+  allowed_widget_patterns [timeline_view activity_feed audit_log]
+  related_terms [term_status_update]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_assignment_board {
+  name "Assignment Board"
+  description "Board-style region for reviewing work grouped by assignee and capacity."
+  kind results
+  pattern board_view
+  placement primary
+  states [loading empty error]
+  density comfortable
+  style_intent [workload_balanced scannable drag_ready]
+  accessibility_obligations [labelled_region keyboard_collection_navigation]
+  i18n_obligations [column_labels empty_state]
+  allowed_widget_patterns [board_view resource_cards status_badge]
+  related_terms [term_assignment_board]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_schedule_calendar {
+  name "Schedule Calendar"
+  description "Calendar or schedule region for shift coverage and field work windows."
+  kind results
+  pattern calendar_view
+  placement primary
+  states [loading empty error]
+  density comfortable
+  style_intent [time_oriented scannable]
+  accessibility_obligations [labelled_region keyboard_collection_navigation]
+  i18n_obligations [date_labels empty_state]
+  allowed_widget_patterns [calendar_view resource_cards]
+  related_terms [term_operations_control_room]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_live_alerts {
+  name "Live Alerts"
+  description "Supporting region for SLA risk, live alerts, and acknowledgement work."
+  kind activity
+  pattern activity_feed
+  placement supporting
+  states [loading empty error]
+  density compact
+  style_intent [time_sensitive noticeable non_blocking]
+  accessibility_obligations [live_region polite_announcements pause_updates]
+  i18n_obligations [alert_labels relative_time_labels]
+  allowed_widget_patterns [activity_feed status_badge empty_state_panel]
+  related_terms [term_sla_risk]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_settings_panel {
+  name "Settings Panel"
+  description "Settings and preference region for operational display and alert behavior."
+  kind content
+  pattern settings_section
+  placement primary
+  states [loading error]
+  density comfortable
+  style_intent [configuration readable]
+  accessibility_obligations [labelled_region form_labels]
+  i18n_obligations [setting_labels help_text]
+  allowed_widget_patterns [settings_section detail_panel edit_form]
+  related_terms [term_operations_control_room]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+region region_dashboard_summary {
+  name "Dashboard Summary"
+  description "Summary KPI region for top-level operational counts and SLA risk."
+  kind results
+  pattern summary_stats
+  placement primary
+  states [loading empty error]
+  density compact
+  style_intent [summary scannable executive]
+  accessibility_obligations [labelled_region]
+  i18n_obligations [metric_labels empty_state]
+  allowed_widget_patterns [summary_stats resource_cards]
+  related_terms [term_operations_control_room]
+  domain dom_operations_ui_work_map
+  status active
+}

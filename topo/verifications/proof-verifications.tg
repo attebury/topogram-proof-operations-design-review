@@ -1,0 +1,19 @@
+verification verification_react_baseline_build {
+  name "React Baseline Build"
+  description "Runs TypeScript and Vite build checks for the maintained React operations app."
+  validates [cap_validate_workspace]
+  method runtime
+  scenarios [npm_run_build_react]
+  domain dom_operations_ui_work_map
+  status active
+}
+
+verification verification_topogram_domain_check {
+  name "Topogram Domain Check"
+  description "Runs Topogram workspace validation after adding the operations domain model."
+  validates [cap_validate_workspace, cap_query_context]
+  method contract
+  scenarios [topogram_check_json, topogram_sdlc_check_strict]
+  domain dom_operations_ui_work_map
+  status active
+}

@@ -1,11 +1,12 @@
 {
   "cliVersion": "0.3.117",
-  "currentStep": "proof-01-react-component-system",
+  "currentStep": "proof-02-semantic-work-map",
   "expectedTags": [
-    "proof-01-react-component-system"
+    "proof-01-react-component-system",
+    "proof-02-semantic-work-map"
   ],
   "expectations": {
-    "noTopo": true,
+    "noTopo": false,
     "reactApp": true
   },
   "requiredArtifacts": [
@@ -17,7 +18,34 @@
     {
       "path": "proof/artifacts/step-01-react-component-system/component-system.md",
       "contains": ["# Step 01 Component System", "Acme Operations UI", "acme.dataGrid"]
+    },
+    {
+      "path": "proof/artifacts/step-02-semantic-work-map/check.json",
+      "json": true,
+      "requiredKeys": ["ok", "topogram"]
+    },
+    {
+      "path": "proof/artifacts/step-02-semantic-work-map/sdlc-check.json",
+      "json": true,
+      "requiredKeys": ["ok"]
+    },
+    {
+      "path": "proof/artifacts/step-02-semantic-work-map/work-map.md",
+      "contains": ["# Work Map", "Screen Inventory", "Widget Binding Work Leaves"]
+    },
+    {
+      "path": "proof/artifacts/step-02-semantic-work-map/work-map.json",
+      "json": true,
+      "requiredKeys": ["type", "designer_review", "screens"]
+    },
+    {
+      "path": "proof/artifacts/step-02-semantic-work-map/screen-slice.md",
+      "contains": ["# Context Slice", "intake_queue", "UI Work Map"]
+    },
+    {
+      "path": "proof/artifacts/step-02-semantic-work-map/widget-slice.json",
+      "json": true,
+      "requiredKeys": ["type", "ui_agent_packet"]
     }
   ]
 }
-

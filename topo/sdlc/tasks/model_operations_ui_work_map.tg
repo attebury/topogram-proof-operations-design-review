@@ -1,0 +1,16 @@
+task task_model_operations_ui_work_map {
+  name "Model Operations UI Work Map"
+  description "Add the Step 03 semantic UI work map and capture focused JSON and Markdown slices for screen, layout, region, and widget review."
+  satisfies [req_operations_ui_work_map]
+  acceptance_refs [ac_operations_ui_work_map_slices]
+  verification_refs [verification_react_baseline_build, verification_topogram_domain_check, verification_ui_work_map_slices]
+  affects [cap_list_intake_items, cap_view_incident_detail, cap_view_assignment_board, cap_query_context]
+  blocked_by []
+  disposition active
+  risk_class medium
+  change_type ui
+  priority high
+  work_type implementation
+  claimed_by [actor_ui_agent]
+  status done
+}

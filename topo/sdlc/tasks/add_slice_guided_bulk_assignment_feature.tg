@@ -1,0 +1,17 @@
+task task_add_slice_guided_bulk_assignment_feature {
+  name "Add Slice Guided Bulk Assignment Feature"
+  description "Capture before slices, update Topogram with workload hint capability/shape/widget/binding/component map, implement the maintained React bulk assignment feature, and capture after proof artifacts."
+  satisfies [req_slice_guided_bulk_assignment_feature]
+  acceptance_refs [ac_slice_guided_bulk_assignment_feature]
+  verification_refs [verification_react_baseline_build, verification_topogram_domain_check, verification_slice_guided_bulk_assignment]
+  affects [cap_list_intake_items, cap_view_reviewer_workload_hints, cap_bulk_assign_incidents, cap_query_context]
+  blocked_by []
+  disposition active
+  risk_class medium
+  change_type ui
+  priority high
+  work_type implementation
+  claimed_by [actor_ui_agent]
+  status done
+}
+

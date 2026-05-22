@@ -1,0 +1,23 @@
+{
+  "version": "1",
+  "status": "adopted",
+  "mode": "enforced",
+  "profile": "standard",
+  "protectedPaths": [
+    "topo/**",
+    "proof/**",
+    "scripts/**",
+    ".github/**",
+    "README.md",
+    "AGENTS.md",
+    "package.json"
+  ],
+  "requiredItemKinds": [
+    "task",
+    "requirement",
+    "pitch"
+  ],
+  "allowExemptions": true,
+  "releaseNotes": false
+}
+

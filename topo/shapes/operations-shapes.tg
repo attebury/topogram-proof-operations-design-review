@@ -1,0 +1,85 @@
+shape shape_input_list_intake {
+  name "List Intake Input"
+  description "Filters for the intake queue mock capability."
+
+  fields {
+    query text optional
+    priority incident_priority optional
+    status incident_status optional
+    limit integer optional default 25
+  }
+
+  status active
+}
+
+shape shape_output_incident_row from entity_incident {
+  name "Incident Row"
+  description "Compact incident row for queues, tables, cards, and assignment columns."
+  include [id, title, priority, status, team, assignee_id, location, sla_minutes]
+  status active
+}
+
+shape shape_output_incident_detail from entity_incident {
+  name "Incident Detail"
+  description "Detailed incident payload for the incident detail screen."
+  include [id, title, priority, status, team, assignee_id, submitted_at, location, summary, sla_minutes, tags]
+  status active
+}
+
+shape shape_output_assignee_card from entity_assignee {
+  name "Assignee Card"
+  description "Assignee summary used by the assignment board."
+  include [id, name, role, capacity]
+  status active
+}
+
+shape shape_output_workload_hint {
+  name "Workload Hint"
+  description "Reviewer workload hint shown beside the intake queue before a bulk assignment action."
+
+  fields {
+    assignee_id text required
+    name string required
+    role string required
+    active_count integer required
+    capacity string required
+    risk_level text required
+    suggested boolean required default false
+  }
+
+  status active
+}
+
+shape shape_input_bulk_assign {
+  name "Bulk Assign Input"
+  description "Selected incidents and assignee target for a later slice-guided UI feature."
+
+  fields {
+    incident_ids text required
+    assignee_id text required
+    note text optional
+  }
+
+  status active
+}
+
+shape shape_output_shift_card from entity_shift {
+  name "Shift Card"
+  description "Schedule card shown in the field schedule screen."
+  include [id, team, window, coverage]
+  status active
+}
+
+shape shape_output_alert_banner from entity_alert {
+  name "Alert Banner"
+  description "Live alert summary shown in dashboard and global feedback regions."
+  include [id, title, severity, summary]
+  status active
+}
+
+shape shape_output_timeline_event from entity_status_update {
+  name "Timeline Event"
+  description "Incident timeline event for the incident detail screen."
+  include [id, incident_id, time, label, note]
+  status active
+}

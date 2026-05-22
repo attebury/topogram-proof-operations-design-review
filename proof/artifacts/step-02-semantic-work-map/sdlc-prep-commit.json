@@ -1,0 +1,224 @@
+{
+  "changedFiles": [
+    "proof/artifacts/current-check.json",
+    "proof/artifacts/current-sdlc-check.json",
+    "topo/actors/operations-actors.tg",
+    "topo/capabilities/engineering-workflow.tg",
+    "topo/capabilities/operations-capabilities.tg",
+    "topo/domains/operations-domains.tg",
+    "topo/entities/operations-entities.tg",
+    "topo/enums/operations-enums.tg",
+    "topo/rules/engineering-laws.tg",
+    "topo/sdlc/acceptance_criteria/maintained_react_ui_markers.tg",
+    "topo/sdlc/acceptance_criteria/operations_design_component_map_reports.tg",
+    "topo/sdlc/acceptance_criteria/operations_domain_model_validates.tg",
+    "topo/sdlc/acceptance_criteria/operations_ui_work_map_slices.tg",
+    "topo/sdlc/acceptance_criteria/slice_guided_bulk_assignment_feature.tg",
+    "topo/sdlc/decisions/repo-local-laws-are-enforceable.tg",
+    "topo/sdlc/pitches/operations_ui_work_map_proof.tg",
+    "topo/sdlc/requirements/maintained_react_ui_alignment.tg",
+    "topo/sdlc/requirements/operations_design_component_map.tg",
+    "topo/sdlc/requirements/operations_domain_model.tg",
+    "topo/sdlc/requirements/operations_ui_work_map.tg",
+    "topo/sdlc/requirements/slice_guided_bulk_assignment_feature.tg",
+    "topo/sdlc/tasks/add_slice_guided_bulk_assignment_feature.tg",
+    "topo/sdlc/tasks/align_react_app_to_ui_work_map.tg",
+    "topo/sdlc/tasks/model_operations_design_component_map.tg",
+    "topo/sdlc/tasks/model_operations_domain.tg",
+    "topo/sdlc/tasks/model_operations_ui_work_map.tg",
+    "topo/shapes/operations-shapes.tg",
+    "topo/surfaces/operations-ui.tg",
+    "topo/terms/operations-ui.tg",
+    "topo/ui-structure/layouts.tg",
+    "topo/ui-structure/regions.tg",
+    "topo/verifications/design-component-map-verifications.tg",
+    "topo/verifications/proof-verifications.tg",
+    "topo/verifications/react-ui-marker-verifications.tg",
+    "topo/verifications/slice-guided-feature-verifications.tg",
+    "topo/verifications/ui-work-map-verifications.tg",
+    "topo/widgets/operations-widgets.tg",
+    "topogram.project.json",
+    "topogram.sdlc-policy.json"
+  ],
+  "changedTasks": [
+    {
+      "change_type": "ui",
+      "disposition": "active",
+      "explicitDisposition": true,
+      "file": "topo/sdlc/tasks/add_slice_guided_bulk_assignment_feature.tg",
+      "id": "task_add_slice_guided_bulk_assignment_feature",
+      "latest_verification_runs": [
+        {
+          "latest": null,
+          "verification_id": "verification_react_baseline_build"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_topogram_domain_check"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_slice_guided_bulk_assignment"
+        }
+      ],
+      "priority": "high",
+      "proof_learning_review": null,
+      "requiresDisposition": false,
+      "risk_class": "medium",
+      "status": "done"
+    },
+    {
+      "change_type": "ui",
+      "disposition": "active",
+      "explicitDisposition": true,
+      "file": "topo/sdlc/tasks/align_react_app_to_ui_work_map.tg",
+      "id": "task_align_react_app_to_ui_work_map",
+      "latest_verification_runs": [
+        {
+          "latest": null,
+          "verification_id": "verification_react_baseline_build"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_topogram_domain_check"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_react_ui_marker_audit"
+        }
+      ],
+      "priority": "high",
+      "proof_learning_review": null,
+      "requiresDisposition": false,
+      "risk_class": "medium",
+      "status": "done"
+    },
+    {
+      "change_type": "ui",
+      "disposition": "active",
+      "explicitDisposition": true,
+      "file": "topo/sdlc/tasks/model_operations_design_component_map.tg",
+      "id": "task_model_operations_design_component_map",
+      "latest_verification_runs": [
+        {
+          "latest": null,
+          "verification_id": "verification_react_baseline_build"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_topogram_domain_check"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_operations_design_component_map"
+        }
+      ],
+      "priority": "high",
+      "proof_learning_review": null,
+      "requiresDisposition": false,
+      "risk_class": "medium",
+      "status": "done"
+    },
+    {
+      "change_type": "sdlc",
+      "disposition": "active",
+      "explicitDisposition": true,
+      "file": "topo/sdlc/tasks/model_operations_domain.tg",
+      "id": "task_model_operations_domain",
+      "latest_verification_runs": [
+        {
+          "latest": null,
+          "verification_id": "verification_react_baseline_build"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_topogram_domain_check"
+        }
+      ],
+      "priority": "high",
+      "proof_learning_review": null,
+      "requiresDisposition": false,
+      "risk_class": "low",
+      "status": "done"
+    },
+    {
+      "change_type": "ui",
+      "disposition": "active",
+      "explicitDisposition": true,
+      "file": "topo/sdlc/tasks/model_operations_ui_work_map.tg",
+      "id": "task_model_operations_ui_work_map",
+      "latest_verification_runs": [
+        {
+          "latest": null,
+          "verification_id": "verification_react_baseline_build"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_topogram_domain_check"
+        },
+        {
+          "latest": null,
+          "verification_id": "verification_ui_work_map_slices"
+        }
+      ],
+      "priority": "high",
+      "proof_learning_review": null,
+      "requiresDisposition": false,
+      "risk_class": "medium",
+      "status": "done"
+    }
+  ],
+  "errors": [],
+  "nextCommands": [
+    "topogram sdlc explain <task-id> --json",
+    "topogram query slice ./topo --task <task-id> --json",
+    "topogram sdlc gate . --base <ref> --head <ref> --require-adopted"
+  ],
+  "ok": true,
+  "openTasks": [],
+  "projectRoot": "<repo>",
+  "staleWork": {
+    "breaches": [],
+    "nextCommands": [
+      "topogram query sdlc-claimed ./topo --json",
+      "topogram query sdlc-proof-gaps ./topo --json",
+      "topogram sdlc prep commit . --json"
+    ],
+    "now": "2026-05-22T12:17:59.443Z",
+    "ok": true,
+    "policy": {
+      "configured": false,
+      "staleWork": {
+        "claimedDays": null,
+        "inProgressDays": null
+      },
+      "wipLimits": {
+        "maxClaimedTasksPerActor": null,
+        "maxInProgressTasks": null
+      }
+    },
+    "stale": {
+      "claimed": [],
+      "in_progress": [],
+      "missing_history": []
+    },
+    "type": "sdlc_stale_work_query",
+    "version": 1,
+    "wip": {
+      "by_actor": [],
+      "claimed_count": 0,
+      "in_progress_count": 0
+    }
+  },
+  "taskFiles": [
+    "topo/sdlc/tasks/add_slice_guided_bulk_assignment_feature.tg",
+    "topo/sdlc/tasks/align_react_app_to_ui_work_map.tg",
+    "topo/sdlc/tasks/model_operations_design_component_map.tg",
+    "topo/sdlc/tasks/model_operations_domain.tg",
+    "topo/sdlc/tasks/model_operations_ui_work_map.tg"
+  ],
+  "topogramRoot": "<workspace>",
+  "type": "sdlc_commit_prep",
+  "version": "1",
+  "warnings": []
+}

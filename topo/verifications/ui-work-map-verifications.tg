@@ -1,0 +1,9 @@
+verification verification_ui_work_map_slices {
+  name "UI Work Map Slices"
+  description "Runs focused Topogram query slices for screen, layout, region, and widget UI work-map review."
+  validates [cap_query_context, cap_validate_workspace]
+  method contract
+  scenarios [screen_slice_json_markdown, layout_slice_json_markdown, region_slice_json_markdown, widget_slice_json_markdown]
+  domain dom_operations_ui_work_map
+  status active
+}

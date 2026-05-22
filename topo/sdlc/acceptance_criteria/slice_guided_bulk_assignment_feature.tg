@@ -1,0 +1,7 @@
+acceptance_criterion ac_slice_guided_bulk_assignment_feature {
+  name "Slice Guided Bulk Assignment Feature"
+  description "Given an agent starts from the intake screen and data-grid slices, when the workload-hint feature is added, then Topogram after-slices, source markers, bundle markers, and React build output prove the feature was implemented from the work map."
+  requirement req_slice_guided_bulk_assignment_feature
+  status approved
+}
+

@@ -1,0 +1,7 @@
+enum incident_priority {
+  values [critical, high, medium, low]
+}
+
+enum incident_status {
+  values [new, triage, assigned, in_progress, blocked, resolved]
+}

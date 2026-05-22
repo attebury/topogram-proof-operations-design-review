@@ -1,0 +1,71 @@
+term term_operations_control_room {
+  name "Operations Control Room"
+  description "The demo workspace where leads monitor intake, assignment, incidents, schedules, and alerts."
+  category product_domain
+  domain dom_operations_control_room
+  related_terms [term_intake_queue, term_assignment_board]
+  status active
+}
+
+term term_intake_queue {
+  name "Intake Queue"
+  description "A prioritized list of incidents waiting for triage, assignment, or status review."
+  category product_domain
+  domain dom_operations_control_room
+  related_terms [term_incident, term_sla_risk]
+  status active
+}
+
+term term_incident {
+  name "Incident"
+  description "A unit of operational work with priority, status, assignment, location, summary, SLA risk, and timeline updates."
+  category product_domain
+  domain dom_operations_control_room
+  related_terms [term_intake_queue, term_status_update]
+  status active
+}
+
+term term_assignment_board {
+  name "Assignment Board"
+  description "A view that groups active incidents by assignee or unassigned queue so workload can be reviewed."
+  category product_domain
+  domain dom_operations_control_room
+  related_terms [term_incident]
+  status active
+}
+
+term term_sla_risk {
+  name "SLA Risk"
+  description "A signal that an incident is close to breaching its operational response target."
+  category product_domain
+  domain dom_operations_control_room
+  related_terms [term_incident]
+  status active
+}
+
+term term_status_update {
+  name "Status Update"
+  description "Timeline evidence that records how an incident moved through triage, assignment, escalation, and resolution."
+  category product_domain
+  domain dom_operations_control_room
+  related_terms [term_incident]
+  status active
+}
+
+term term_mock_capability {
+  name "Mock Capability"
+  description "A real Topogram capability whose implementation is backed by local mock data instead of a generated API or database runtime."
+  category proof
+  domain dom_operations_ui_work_map
+  related_terms [term_operations_control_room]
+  status active
+}
+
+term term_work_map {
+  name "Work Map"
+  description "A non-rendering Topogram graph that tells humans and agents where UI work belongs, what it touches, and how to prove it."
+  category proof
+  domain dom_operations_ui_work_map
+  related_terms [term_operations_control_room, term_mock_capability]
+  status active
+}

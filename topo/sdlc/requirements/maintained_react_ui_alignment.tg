@@ -1,0 +1,13 @@
+requirement req_maintained_react_ui_alignment {
+  name "Maintained React UI Alignment"
+  description "The maintained React operations app should carry Topogram screen, region, widget, message, accessibility, design language, and component-map markers so humans and agents can inspect how source code realizes the semantic UI work map."
+  pitch pitch_operations_ui_work_map_proof
+  affects [cap_list_intake_items, cap_view_incident_detail, cap_view_assignment_board, cap_query_context]
+  introduces_rules []
+  respects_rules [rule_tests_prove_consumer_value, rule_agents_start_with_focused_context]
+  related_terms [term_operations_control_room, term_intake_queue]
+  domain dom_operations_ui_work_map
+  priority high
+  status approved
+}
+

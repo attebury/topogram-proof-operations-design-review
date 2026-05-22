@@ -1,0 +1,10 @@
+verification verification_react_ui_marker_audit {
+  name "React UI Marker Audit"
+  description "Builds the maintained React app and audits source plus compiled bundle output for Topogram UI work-map markers."
+  validates [cap_query_context, cap_validate_workspace]
+  method contract
+  scenarios [react_source_marker_audit, react_bundle_marker_audit, ui_design_coverage_after_alignment]
+  domain dom_operations_ui_work_map
+  status active
+}
+

@@ -1,0 +1,13 @@
+pitch pitch_operations_ui_work_map_proof {
+  name "Operations UI Work Map Proof"
+  description "Show that Topogram can guide a substantial running UI through a maintained React app, semantic work map, designer review packet, and slice-guided change."
+  appetite "medium"
+  problem "Designers, front-end developers, and agents need to see Topogram guide a substantial running UI, not only a tiny terminology fixture."
+  solution_sketch "Use mock operations entities and capabilities, a maintained React baseline, focused UI slices, and a designer-readable work-map packet from the same Topogram source."
+  rabbit_holes "Do not add a database, API runtime, pixel-perfect screenshot proof, or native generated app in this proof."
+  no_go_areas "Do not make React source paths the canonical design mapping; component refs remain semantic identities."
+  affects [cap_list_intake_items, cap_view_incident_detail, cap_view_assignment_board, cap_query_context]
+  domain dom_operations_ui_work_map
+  priority high
+  status shaped
+}

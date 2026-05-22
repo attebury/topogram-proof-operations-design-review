@@ -1,0 +1,16 @@
+task task_model_operations_domain {
+  name "Model Operations Domain"
+  description "Add the Step 02 Topogram domain model for mock operations entities, shapes, capabilities, glossary terms, and SDLC proof records."
+  satisfies [req_operations_domain_model]
+  acceptance_refs [ac_operations_domain_model_validates]
+  verification_refs [verification_react_baseline_build, verification_topogram_domain_check]
+  affects [cap_list_intake_items, cap_view_incident_detail, cap_view_assignment_board, cap_query_context]
+  blocked_by []
+  disposition active
+  risk_class low
+  change_type sdlc
+  priority high
+  work_type implementation
+  claimed_by [actor_ui_agent]
+  status done
+}

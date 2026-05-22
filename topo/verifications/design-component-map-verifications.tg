@@ -1,0 +1,10 @@
+verification verification_operations_design_component_map {
+  name "Operations Design Component Map Reports"
+  description "Runs UI design coverage, UI realization report, and design-aware focused slices for the operations component map proof."
+  validates [cap_query_context, cap_validate_workspace]
+  method contract
+  scenarios [ui_design_coverage_json_markdown, ui_realization_report_json, design_aware_widget_slice]
+  domain dom_operations_ui_work_map
+  status active
+}
+

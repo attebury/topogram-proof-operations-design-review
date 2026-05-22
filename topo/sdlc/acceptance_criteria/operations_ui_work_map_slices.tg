@@ -1,0 +1,6 @@
+acceptance_criterion ac_operations_ui_work_map_slices {
+  name "Operations UI Work Map Slices"
+  description "Given the proof repo has a semantic UI surface with layouts, regions, widgets, bindings, messages, and accessibility obligations, when an agent requests focused slices for a screen, layout, region, and widget, then the slices expose work-map context without requiring a DB or API runtime."
+  requirement req_operations_ui_work_map
+  status approved
+}

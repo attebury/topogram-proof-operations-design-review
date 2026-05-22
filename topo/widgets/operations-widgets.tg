@@ -1,0 +1,263 @@
+widget widget_kpi_summary_cards {
+  name "KPI Summary Cards"
+  description "Operational health cards for open incident counts, critical work, blocked work, and SLA risk."
+  category collection
+
+  props {
+    items array required
+    selected_ids array optional default []
+    loading boolean optional default false
+  }
+
+  events {
+    card_select shape_output_incident_row
+  }
+
+  behavior [selection]
+  behaviors {
+    selection mode single state selected_ids emits card_select
+  }
+  patterns [summary_stats resource_cards]
+  regions [results]
+  version "1.0"
+  status active
+}
+
+widget widget_data_grid {
+  name "Data Grid"
+  description "High-density incident table for queue and team review."
+  category collection
+
+  props {
+    rows array required
+    selected_ids array optional default []
+    loading boolean optional default false
+  }
+
+  events {
+    row_select shape_output_incident_row
+  }
+
+  behavior [selection sorting filtering keyboard_navigation]
+  behaviors {
+    selection mode single state selected_ids emits row_select
+    sorting fields [priority status sla_minutes] default [priority asc]
+    filtering fields [priority status team assignee_id location]
+    keyboard_navigation scope collection shortcuts [enter open escape clear]
+  }
+  patterns [resource_table data_grid_view]
+  regions [results]
+  version "1.0"
+  status active
+}
+
+widget widget_filter_panel {
+  name "Filter Panel"
+  description "Filter and search controls for incident queues and schedules."
+  category lookup
+
+  props {
+    filters array required
+    active_filters array optional default []
+  }
+
+  events {
+    filter_change shape_input_list_intake
+  }
+
+  behavior [filtering search]
+  behaviors {
+    filtering fields [priority status team location]
+    search fields [title location team]
+  }
+  patterns [filter_panel lookup_select search_results]
+  regions [filters]
+  version "1.0"
+  status active
+}
+
+widget widget_workload_hint_panel {
+  name "Workload Hint Panel"
+  description "Assignment guidance panel that shows reviewer workload, capacity, and suggested assignment target."
+  category display
+
+  props {
+    hints array required
+    selected_ids array optional default []
+    target_assignee_id text optional
+  }
+
+  events {
+    assign shape_input_bulk_assign
+  }
+
+  behavior [selection bulk_action]
+  behaviors {
+    selection mode single state target_assignee_id emits assign
+    bulk_action actions [assign] state selected_ids emits assign
+  }
+  patterns [resource_cards status_badge]
+  regions [summary toolbar aside]
+  version "1.0"
+  status active
+}
+
+widget widget_command_toolbar {
+  name "Command Toolbar"
+  description "Compact screen command surface for refresh, assign, status change, and alert acknowledgement actions."
+  category navigation
+
+  props {
+    actions array required
+    selected_ids array optional default []
+  }
+
+  events {
+    primary_action shape_output_incident_row
+  }
+
+  behavior [bulk_action keyboard_navigation]
+  behaviors {
+    bulk_action actions [primary_action] state selected_ids emits primary_action
+    keyboard_navigation scope toolbar shortcuts [tab enter escape]
+  }
+  patterns [action_bar status_badge]
+  regions [toolbar]
+  version "1.0"
+  status active
+}
+
+widget widget_detail_panel {
+  name "Detail Panel"
+  description "Readable selected incident summary for status, assignment, location, and SLA context."
+  category display
+
+  props {
+    item object required
+    loading boolean optional default false
+  }
+
+  events {
+    edit_requested shape_output_incident_detail
+  }
+
+  patterns [detail_panel inspector_pane]
+  regions [summary results]
+  version "1.0"
+  status active
+}
+
+widget widget_status_board {
+  name "Status Board"
+  description "Board-style workload view for incidents grouped by assignee and status."
+  category collection
+
+  props {
+    columns array required
+    selected_ids array optional default []
+    loading boolean optional default false
+  }
+
+  events {
+    item_select shape_output_incident_row
+  }
+
+  behavior [selection drag_drop]
+  behaviors {
+    selection mode single state selected_ids emits item_select
+    drag_drop axis both reorder true
+  }
+  patterns [board_view status_badge resource_cards]
+  regions [results]
+  version "1.0"
+  status active
+}
+
+widget widget_activity_timeline {
+  name "Activity Timeline"
+  description "Chronological activity and status-change trail for incident review."
+  category display
+
+  props {
+    timeline_items array required
+    selected_ids array optional default []
+    loading boolean optional default false
+  }
+
+  patterns [timeline_view activity_feed audit_log]
+  regions [timeline activity]
+  version "1.0"
+  status active
+}
+
+widget widget_schedule_calendar {
+  name "Schedule Calendar"
+  description "Schedule view for field shifts and work windows."
+  category collection
+
+  props {
+    items array required
+    selected_ids array optional default []
+    loading boolean optional default false
+  }
+
+  events {
+    item_select shape_output_shift_card
+  }
+
+  behavior [selection]
+  behaviors {
+    selection mode single state selected_ids emits item_select
+  }
+  patterns [calendar_view]
+  regions [results]
+  version "1.0"
+  status active
+}
+
+widget widget_alert_banner {
+  name "Alert Banner"
+  description "Time-sensitive operational alerts and live update summaries."
+  category feedback
+
+  props {
+    alerts array required
+  }
+
+  events {
+    alert_select shape_output_alert_banner
+  }
+
+  behavior [realtime_update]
+  behaviors {
+    realtime_update source cap_acknowledge_alert merge append
+  }
+  patterns [activity_feed status_badge empty_state_panel]
+  regions [activity header]
+  version "1.0"
+  status active
+}
+
+widget widget_settings_panel {
+  name "Settings Panel"
+  description "Preference and configuration surface for dashboard display behavior."
+  category form
+
+  props {
+    value object required
+    options array optional default []
+  }
+
+  events {
+    submit shape_output_incident_detail
+  }
+
+  behavior [keyboard_navigation]
+  behaviors {
+    keyboard_navigation scope form shortcuts [tab enter escape]
+  }
+  patterns [settings_section edit_form]
+  regions [summary]
+  version "1.0"
+  status active
+}

@@ -1,0 +1,10 @@
+verification verification_slice_guided_bulk_assignment {
+  name "Slice Guided Bulk Assignment Proof"
+  description "Verifies before and after context slices, maintained React build output, and source/bundle markers for the workload-hint bulk assignment feature."
+  validates [cap_query_context, cap_validate_workspace, cap_bulk_assign_incidents]
+  method contract
+  scenarios [before_screen_slice, after_screen_slice, after_widget_slice, react_workload_hint_marker_audit]
+  domain dom_operations_ui_work_map
+  status active
+}
+

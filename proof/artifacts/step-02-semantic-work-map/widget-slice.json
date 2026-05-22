@@ -1,0 +1,1032 @@
+{
+  "agent_guidance": {
+    "completion_command": "topogram sdlc prep commit . --json",
+    "mode": "implementation",
+    "next_commands": [
+      "topogram query slice ./topo --mode implementation --surface surface_operations_web_react --widget widget_data_grid --detail compact --json",
+      "topogram query single-agent-plan ./topo --mode implementation --surface surface_operations_web_react --widget widget_data_grid --json",
+      "topogram query sdlc-proof-gaps ./topo --json",
+      "topogram check . --json",
+      "topogram sdlc check . --strict",
+      "topogram sdlc prep commit . --json"
+    ],
+    "next_queries": [
+      "topogram query slice ./topo --mode implementation --surface surface_operations_web_react --widget widget_data_grid --detail compact --json",
+      "topogram query single-agent-plan ./topo --mode implementation --surface surface_operations_web_react --widget widget_data_grid --json"
+    ],
+    "proof_commands": [
+      "topogram check . --json",
+      "topogram sdlc check . --strict",
+      "topogram sdlc prep commit . --json"
+    ],
+    "read_first": [
+      "focus",
+      "summary",
+      "agent_guidance",
+      "standing_rules",
+      "review_boundary",
+      "ownership_boundary",
+      "write_scope",
+      "ui_agent_packet"
+    ],
+    "read_order": [
+      "focus",
+      "summary",
+      "agent_guidance",
+      "standing_rules",
+      "review_boundary",
+      "ownership_boundary",
+      "write_scope",
+      "ui_agent_packet"
+    ],
+    "required_commands": [
+      "topogram query sdlc-proof-gaps ./topo --json",
+      "topogram check . --json",
+      "topogram sdlc check . --strict",
+      "topogram sdlc prep commit . --json"
+    ],
+    "warnings": [],
+    "write_scope_summary": "Edit the canonical Topogram source and project-owned files only; generated-owned outputs should be regenerated."
+  },
+  "depends_on": {
+    "capabilities": [],
+    "entities": [],
+    "shapes": [
+      "shape_output_incident_row"
+    ],
+    "surfaces": [
+      "surface_operations_ui",
+      "surface_operations_web_react"
+    ],
+    "verifications": [],
+    "widgets": []
+  },
+  "detail_level": "compact",
+  "focus": {
+    "id": "widget_data_grid",
+    "kind": "widget",
+    "projectionId": "surface_operations_web_react",
+    "scope": {
+      "componentMapId": null,
+      "layoutId": null,
+      "projectionId": "surface_operations_web_react",
+      "regionId": null,
+      "screenId": null
+    }
+  },
+  "ownership_boundary": {
+    "canonical_topogram": {
+      "agent_mode": "propose_review_adopt",
+      "owner": "human"
+    },
+    "generated_artifacts": {
+      "agent_mode": "regenerate_or_compare",
+      "owner": "engine"
+    },
+    "maintained_code": {
+      "agent_mode": "bounded_edit_only",
+      "owner": "human"
+    },
+    "proposal_surfaces": {
+      "agent_mode": "stage_map_customize_reject",
+      "owner": "human"
+    }
+  },
+  "related": {},
+  "related_summary": {
+    "shapes": {
+      "count": 1,
+      "ids": [
+        "shape_output_incident_row"
+      ]
+    },
+    "surfaces": {
+      "count": 2,
+      "ids": [
+        "surface_operations_ui",
+        "surface_operations_web_react"
+      ]
+    }
+  },
+  "review_boundary": {
+    "automation_class": "review_required",
+    "reasons": [
+      "widget_surface"
+    ]
+  },
+  "slice_manifest": {
+    "detail_level": "compact",
+    "note": "Read must_read sections first; use reference sections only as needed; run proof commands before completing work.",
+    "proof_sections": [
+      "verification_targets"
+    ],
+    "read_order": [
+      "focus",
+      "summary",
+      "agent_guidance",
+      "standing_rules",
+      "review_boundary",
+      "ownership_boundary",
+      "write_scope",
+      "ui_agent_packet"
+    ],
+    "sections": [
+      {
+        "field": "focus",
+        "id": "focus",
+        "item_count": 4,
+        "reason": "The selected graph surface this packet is scoped to.",
+        "tier": "must_read",
+        "title": "Focus"
+      },
+      {
+        "field": "summary",
+        "id": "summary",
+        "item_count": 18,
+        "reason": "The shortest human-readable description of the selected work or surface.",
+        "tier": "must_read",
+        "title": "Summary"
+      },
+      {
+        "field": "agent_guidance",
+        "id": "agent_guidance",
+        "item_count": 10,
+        "reason": "Mode, read order, follow-up queries, and required proof commands.",
+        "tier": "must_read",
+        "title": "Agent Guidance"
+      },
+      {
+        "field": "standing_rules",
+        "id": "standing_rules",
+        "item_count": 3,
+        "reason": "Repo-level laws that should shape implementation choices.",
+        "tier": "must_read",
+        "title": "Standing Rules"
+      },
+      {
+        "field": "review_boundary",
+        "id": "review_boundary",
+        "item_count": 2,
+        "reason": "Automation and human-review expectations for this scope.",
+        "tier": "must_read",
+        "title": "Review Boundary"
+      },
+      {
+        "field": "ownership_boundary",
+        "id": "ownership_boundary",
+        "item_count": 4,
+        "reason": "Generated, maintained, and human-owned boundaries that constrain edits.",
+        "tier": "must_read",
+        "title": "Ownership Boundary"
+      },
+      {
+        "field": "write_scope",
+        "id": "write_scope",
+        "item_count": 4,
+        "reason": "Files and surfaces that are safe, risky, or out of bounds to edit.",
+        "tier": "must_read",
+        "title": "Write Scope"
+      },
+      {
+        "field": "ui_agent_packet",
+        "id": "ui_agent_packet",
+        "item_count": 13,
+        "reason": "Screen, layout, region, widget, accessibility, i18n, design-token, and UI proof context for UI slices.",
+        "tier": "must_read",
+        "title": "UI Agent Packet"
+      },
+      {
+        "field": "depends_on",
+        "id": "depends_on",
+        "item_count": 6,
+        "reason": "IDs that define the semantic closure without embedding every full record.",
+        "tier": "reference",
+        "title": "Depends On"
+      },
+      {
+        "field": "related_summary",
+        "id": "related_summary",
+        "item_count": 2,
+        "reason": "Compact counts and IDs for related records omitted from compact detail.",
+        "tier": "reference",
+        "title": "Related Summary"
+      },
+      {
+        "field": "verification_targets",
+        "id": "verification_targets",
+        "item_count": 4,
+        "reason": "Smallest verification set recommended for this change.",
+        "tier": "proof",
+        "title": "Verification Targets"
+      }
+    ]
+  },
+  "standing_rules": [
+    {
+      "actors": [],
+      "appliesTo": [
+        "cap_maintain_project"
+      ],
+      "description": "Code must be organized, maintainable, security-focused, tested, and testable for long-lived intermittent maintenance.",
+      "id": "rule_maintainable_security_focused_code",
+      "kind": "rule",
+      "name": "Maintainable Security Focused Code",
+      "ownership_boundary": {
+        "canonical_topogram": {
+          "agent_mode": "propose_review_adopt",
+          "owner": "human"
+        },
+        "generated_artifacts": {
+          "agent_mode": "regenerate_or_compare",
+          "owner": "engine"
+        },
+        "maintained_code": {
+          "agent_mode": "bounded_edit_only",
+          "owner": "human"
+        },
+        "proposal_surfaces": {
+          "agent_mode": "stage_map_customize_reject",
+          "owner": "human"
+        }
+      },
+      "roles": [],
+      "severity": "error",
+      "status": "enforced"
+    },
+    {
+      "actors": [],
+      "appliesTo": [
+        "cap_manage_sdlc_records"
+      ],
+      "description": "Status, history, trust, provenance, generated sentinels, archives, release state, and rollout state should be changed through canonical commands.",
+      "id": "rule_stateful_workflow_mutations_use_cli",
+      "kind": "rule",
+      "name": "Stateful Workflow Mutations Use CLI",
+      "ownership_boundary": {
+        "canonical_topogram": {
+          "agent_mode": "propose_review_adopt",
+          "owner": "human"
+        },
+        "generated_artifacts": {
+          "agent_mode": "regenerate_or_compare",
+          "owner": "engine"
+        },
+        "maintained_code": {
+          "agent_mode": "bounded_edit_only",
+          "owner": "human"
+        },
+        "proposal_surfaces": {
+          "agent_mode": "stage_map_customize_reject",
+          "owner": "human"
+        }
+      },
+      "roles": [],
+      "severity": "error",
+      "status": "enforced"
+    },
+    {
+      "actors": [],
+      "appliesTo": [
+        "cap_validate_workspace"
+      ],
+      "description": "Tests should prove behavior that consumers, maintainers, or agents rely on; compile, run, validate, or inspect real outputs where practical.",
+      "id": "rule_tests_prove_consumer_value",
+      "kind": "rule",
+      "name": "Tests Prove Consumer Value",
+      "ownership_boundary": {
+        "canonical_topogram": {
+          "agent_mode": "propose_review_adopt",
+          "owner": "human"
+        },
+        "generated_artifacts": {
+          "agent_mode": "regenerate_or_compare",
+          "owner": "engine"
+        },
+        "maintained_code": {
+          "agent_mode": "bounded_edit_only",
+          "owner": "human"
+        },
+        "proposal_surfaces": {
+          "agent_mode": "stage_map_customize_reject",
+          "owner": "human"
+        }
+      },
+      "roles": [],
+      "severity": "error",
+      "status": "enforced"
+    }
+  ],
+  "summary": {
+    "approvals": [],
+    "behavior": [
+      "filtering",
+      "keyboard_navigation",
+      "selection",
+      "sorting"
+    ],
+    "behaviors": [
+      {
+        "directives": {
+          "emits": "row_select",
+          "mode": "single",
+          "state": "selected_ids"
+        },
+        "kind": "selection",
+        "source": "structured"
+      },
+      {
+        "directives": {
+          "default": [
+            "priority",
+            "asc"
+          ],
+          "fields": [
+            "priority",
+            "status",
+            "sla_minutes"
+          ]
+        },
+        "kind": "sorting",
+        "source": "structured"
+      },
+      {
+        "directives": {
+          "fields": [
+            "priority",
+            "status",
+            "team",
+            "assignee_id",
+            "location"
+          ]
+        },
+        "kind": "filtering",
+        "source": "structured"
+      },
+      {
+        "directives": {
+          "scope": "collection",
+          "shortcuts": [
+            "enter",
+            "open",
+            "escape",
+            "clear"
+          ]
+        },
+        "kind": "keyboard_navigation",
+        "source": "structured"
+      }
+    ],
+    "category": "collection",
+    "dependencies": [],
+    "description": "High-density incident table for queue and team review.",
+    "events": [
+      {
+        "id": "row_select",
+        "shape": "shape_output_incident_row"
+      }
+    ],
+    "id": "widget_data_grid",
+    "kind": "widget",
+    "lookups": [],
+    "name": "Data Grid",
+    "ownership_boundary": {
+      "canonical_topogram": {
+        "agent_mode": "propose_review_adopt",
+        "owner": "human"
+      },
+      "generated_artifacts": {
+        "agent_mode": "regenerate_or_compare",
+        "owner": "engine"
+      },
+      "maintained_code": {
+        "agent_mode": "bounded_edit_only",
+        "owner": "human"
+      },
+      "proposal_surfaces": {
+        "agent_mode": "stage_map_customize_reject",
+        "owner": "human"
+      }
+    },
+    "patterns": [
+      "data_grid_view",
+      "resource_table"
+    ],
+    "props": [
+      {
+        "defaultValue": null,
+        "name": "rows",
+        "requiredness": "required",
+        "type": "array"
+      },
+      {
+        "defaultValue": [],
+        "name": "selected_ids",
+        "requiredness": "optional",
+        "type": "array"
+      },
+      {
+        "defaultValue": false,
+        "name": "loading",
+        "requiredness": "optional",
+        "type": "boolean"
+      }
+    ],
+    "regions": [
+      "results"
+    ],
+    "slots": [],
+    "status": "active",
+    "version": "1.0"
+  },
+  "type": "context_slice",
+  "ui_agent_packet": {
+    "accessibility": {
+      "authoredObligations": [],
+      "currentSignals": {
+        "authoredContract": null,
+        "designTokens": null
+      },
+      "decisions": [
+        {
+          "found": false,
+          "id": "decision_aria_attributes_are_implementation_evidence",
+          "kind": null,
+          "name": "decision_aria_attributes_are_implementation_evidence",
+          "status": null
+        }
+      ],
+      "diagnostics": [
+        "No authored accessibility obligation DSL block exists yet; use the linked terms, decision, and draft requirement as implementation guidance."
+      ],
+      "obligations": [
+        "Prefer semantic role, accessible-name source, keyboard model, focus behavior, live-region need, and proof command over raw aria-* snapshots.",
+        "Treat raw aria-* attributes as generated or maintained implementation evidence, not the contract source."
+      ],
+      "proofCommands": [
+        "topogram widget check --json",
+        "topogram widget behavior --json",
+        "topogram emit ui-realization-report --surface surface_operations_web_react --json"
+      ],
+      "requirements": [
+        {
+          "found": false,
+          "id": "req_aria_accessibility_contract_v1",
+          "kind": null,
+          "name": "req_aria_accessibility_contract_v1",
+          "status": null
+        }
+      ],
+      "scope": {
+        "projectionId": "surface_operations_web_react",
+        "screenId": null,
+        "widgetId": "widget_data_grid"
+      },
+      "source": "topo terms, decisions, draft requirements, and design-token evidence",
+      "status": "semantic_context_only",
+      "terms": [
+        {
+          "found": false,
+          "id": "term_accessibility_obligation",
+          "kind": null,
+          "name": "term_accessibility_obligation",
+          "status": null
+        },
+        {
+          "found": false,
+          "id": "term_accessible_name",
+          "kind": null,
+          "name": "term_accessible_name",
+          "status": null
+        },
+        {
+          "found": false,
+          "id": "term_semantic_role",
+          "kind": null,
+          "name": "term_semantic_role",
+          "status": null
+        },
+        {
+          "found": false,
+          "id": "term_keyboard_interaction",
+          "kind": null,
+          "name": "term_keyboard_interaction",
+          "status": null
+        },
+        {
+          "found": false,
+          "id": "term_live_region",
+          "kind": null,
+          "name": "term_live_region",
+          "status": null
+        }
+      ]
+    },
+    "agent_readiness": {
+      "change_targets": [
+        {
+          "id": "widget_data_grid",
+          "kind": "widget",
+          "reason": "Focused UI work-map node."
+        },
+        {
+          "id": "intake_queue_results_widget_data_grid",
+          "kind": "widget_binding",
+          "reason": "Widget binding is the work leaf where data, action, region, and design obligations meet.",
+          "region": "results",
+          "widget": "widget_data_grid"
+        }
+      ],
+      "human_review_needed": [],
+      "missing_context": [],
+      "proof_commands": [
+        "topogram query ui-design-coverage ./topo --surface surface_operations_web_react --widget widget_data_grid --json",
+        "topogram query ui-design-coverage ./topo --surface surface_operations_web_react --widget widget_data_grid --format markdown",
+        "topogram emit ui-realization-report ./topo --surface surface_operations_web_react --json",
+        "topogram check",
+        "topogram widget check --surface surface_operations_web_react --widget widget_data_grid",
+        "topogram widget behavior --surface surface_operations_web_react --widget widget_data_grid",
+        "topogram emit ui-realization-report --surface surface_operations_web_react --json"
+      ],
+      "ready_to_edit": true,
+      "status": "ready"
+    },
+    "designLanguages": {
+      "contracts": [],
+      "diagnostics": [
+        "No design_language mapping matches this focused UI scope; unsupported or custom component realization is developer/agent review work."
+      ],
+      "proofCommands": [
+        "topogram emit ui-realization-report --surface surface_operations_web_react --json",
+        "topogram query slice ./topo --widget widget_data_grid --json"
+      ],
+      "scope": {
+        "projectionId": "surface_operations_web_react",
+        "screenId": null,
+        "widgetId": "widget_data_grid"
+      },
+      "source": "design_language records own design-system scope and token mappings; component_map records map semantic widgets to platform component refs and behavior support.",
+      "status": "unmapped"
+    },
+    "designReview": {
+      "diagnostics": [
+        "No design matrix rows match this focused UI scope; map the widget in a component_map or record implementation-owned work."
+      ],
+      "gaps": {
+        "behavior_review_items": 0,
+        "missing_accessibility": 0,
+        "missing_i18n": 0,
+        "missing_platforms": 0,
+        "missing_states": 0,
+        "missing_style_evidence": 0,
+        "missing_token_mappings": 0
+      },
+      "matrix": {
+        "review_rows": [],
+        "rows": []
+      },
+      "proofCommands": [
+        "topogram query ui-design-coverage ./topo --surface surface_operations_web_react --widget widget_data_grid --json",
+        "topogram query ui-design-coverage ./topo --surface surface_operations_web_react --widget widget_data_grid --format markdown",
+        "topogram emit ui-realization-report ./topo --surface surface_operations_web_react --json"
+      ],
+      "scope": {
+        "projectionId": "surface_operations_web_react",
+        "screenId": null,
+        "widgetId": "widget_data_grid"
+      },
+      "source": "ui-design-coverage design_matrix rows from design_language and component_map records",
+      "status": "unmapped"
+    },
+    "inheritedBy": [
+      "surface_operations_web_react"
+    ],
+    "internationalization": {
+      "currentSignals": {
+        "authoredContract": null,
+        "localePolicy": null,
+        "messageKeys": []
+      },
+      "decisions": [
+        {
+          "found": false,
+          "id": "decision_i18n_messages_are_separate_from_glossary_terms",
+          "kind": null,
+          "name": "decision_i18n_messages_are_separate_from_glossary_terms",
+          "status": null
+        }
+      ],
+      "diagnostics": [
+        "No authored i18n message contract block exists yet; use linked terms, decision, and draft requirement as implementation guidance."
+      ],
+      "messages": [],
+      "obligations": [
+        "Use glossary terms for canonical meaning and message keys for translated wording.",
+        "Keep concrete locale catalogs in generated or maintained app code until a message contract DSL exists."
+      ],
+      "proofCommands": [
+        "topogram emit glossary ./topo --json"
+      ],
+      "requirements": [
+        {
+          "found": false,
+          "id": "req_i18n_message_contract_v1",
+          "kind": null,
+          "name": "req_i18n_message_contract_v1",
+          "status": null
+        }
+      ],
+      "scope": {
+        "projectionId": "surface_operations_web_react",
+        "screenId": null,
+        "widgetId": "widget_data_grid"
+      },
+      "source": "topo terms, decisions, and draft requirements",
+      "status": "semantic_context_only",
+      "terms": [
+        {
+          "found": false,
+          "id": "term_translatable_message",
+          "kind": null,
+          "name": "term_translatable_message",
+          "status": null
+        },
+        {
+          "found": false,
+          "id": "term_message_key",
+          "kind": null,
+          "name": "term_message_key",
+          "status": null
+        },
+        {
+          "found": false,
+          "id": "term_locale_policy",
+          "kind": null,
+          "name": "term_locale_policy",
+          "status": null
+        },
+        {
+          "found": false,
+          "id": "term_source_text",
+          "kind": null,
+          "name": "term_source_text",
+          "status": null
+        }
+      ]
+    },
+    "ownership": {
+      "concreteSurfacesInherit": true,
+      "widgetContract": "widget",
+      "widgetPlacement": "semantic_ui"
+    },
+    "requiredGates": [
+      {
+        "command": "topogram check",
+        "reason": "Validate shared UI ownership, taxonomy, references, and topology."
+      },
+      {
+        "command": "topogram widget check --surface surface_operations_web_react --widget widget_data_grid",
+        "reason": "Validate widget placement, props, events, regions, and patterns."
+      },
+      {
+        "command": "topogram widget behavior --surface surface_operations_web_react --widget widget_data_grid",
+        "reason": "Inspect behavior realizations and partial bindings before code changes."
+      },
+      {
+        "command": "topogram emit ui-realization-report --surface surface_operations_web_react --json",
+        "reason": "Confirm screens, regions, widgets, display fields, behavior, and design tokens are realizable by the web generator."
+      }
+    ],
+    "scope": {
+      "projectionId": "surface_operations_web_react",
+      "screenId": null,
+      "widgetId": "widget_data_grid"
+    },
+    "sourceUsages": [
+      {
+        "designTokens": [
+          {
+            "key": "density",
+            "role": "compact",
+            "value": null
+          },
+          {
+            "key": "tone",
+            "role": "operational",
+            "value": null
+          },
+          {
+            "key": "radius_scale",
+            "role": "medium",
+            "value": null
+          },
+          {
+            "key": "color_role",
+            "role": "primary",
+            "value": "accent"
+          },
+          {
+            "key": "color_role",
+            "role": "danger",
+            "value": "critical"
+          },
+          {
+            "key": "color_role",
+            "role": "warning",
+            "value": "attention"
+          },
+          {
+            "key": "typography_role",
+            "role": "body",
+            "value": "readable"
+          },
+          {
+            "key": "typography_role",
+            "role": "heading",
+            "value": "prominent"
+          },
+          {
+            "key": "action_role",
+            "role": "primary",
+            "value": "prominent"
+          },
+          {
+            "key": "action_role",
+            "role": "destructive",
+            "value": "danger"
+          },
+          {
+            "key": "accessibility",
+            "role": "contrast",
+            "value": "aa"
+          },
+          {
+            "key": "accessibility",
+            "role": "focus",
+            "value": "visible"
+          }
+        ],
+        "surface": {
+          "id": "surface_operations_ui",
+          "ownership": "owner",
+          "type": "semantic_ui"
+        },
+        "usage": {
+          "behaviorRealizations": [],
+          "bindingId": "intake_queue_results_widget_data_grid",
+          "dataBindings": [
+            {
+              "prop": "rows",
+              "source": "cap_list_intake_items",
+              "sourceKind": "capability"
+            }
+          ],
+          "display": null,
+          "displayFields": [],
+          "eventBindings": [
+            {
+              "action": "navigate",
+              "event": "row_select",
+              "target": "incident_detail"
+            }
+          ],
+          "generatedBindingId": true,
+          "intent": null,
+          "layout": {
+            "appShell": null,
+            "fills": "content",
+            "id": "layout_queue_workspace",
+            "inherited": [
+              {
+                "appShell": "workspace",
+                "fills": null,
+                "id": "layout_standard_app_shell",
+                "name": "Standard App Shell",
+                "pattern": null,
+                "styleIntent": []
+              },
+              {
+                "appShell": null,
+                "fills": "content",
+                "id": "layout_queue_workspace",
+                "name": "Queue Workspace Layout",
+                "pattern": null,
+                "styleIntent": []
+              }
+            ],
+            "name": "Queue Workspace Layout",
+            "pattern": null,
+            "styleIntent": []
+          },
+          "linkedCapabilities": [],
+          "linkedShapes": [],
+          "priority": null,
+          "region": "results",
+          "regionContract": {
+            "accessibilityObligations": [
+              "labelled_region",
+              "keyboard_collection_navigation",
+              "status_announcements"
+            ],
+            "allowedWidgetPatterns": [
+              "resource_table",
+              "data_grid_view",
+              "resource_cards"
+            ],
+            "density": "comfortable",
+            "i18nObligations": [
+              "queue_title",
+              "priority_labels",
+              "empty_state"
+            ],
+            "kind": "results",
+            "layoutId": "layout_queue_workspace",
+            "name": "results",
+            "pattern": "data_grid_view",
+            "placement": "primary",
+            "regionContractId": "region_work_queue",
+            "slotRole": null,
+            "source": "layout",
+            "state": null,
+            "style": {
+              "effective_intent": [
+                "prioritized",
+                "actionable",
+                "queue_focused"
+              ],
+              "sources": [
+                {
+                  "id": "region_work_queue",
+                  "intent": [
+                    "prioritized",
+                    "actionable",
+                    "queue_focused"
+                  ],
+                  "scope": "region"
+                }
+              ]
+            },
+            "styleIntent": [
+              "prioritized",
+              "actionable",
+              "queue_focused"
+            ],
+            "title": "Work Queue",
+            "variant": null
+          },
+          "regionContractId": "region_work_queue",
+          "route": null,
+          "screen": {
+            "id": "intake_queue",
+            "kind": "list",
+            "layout": {
+              "appShell": null,
+              "fills": "content",
+              "id": "layout_queue_workspace",
+              "inherited": [
+                {
+                  "appShell": "workspace",
+                  "fills": null,
+                  "id": "layout_standard_app_shell",
+                  "name": "Standard App Shell",
+                  "pattern": null,
+                  "styleIntent": []
+                },
+                {
+                  "appShell": null,
+                  "fills": "content",
+                  "id": "layout_queue_workspace",
+                  "name": "Queue Workspace Layout",
+                  "pattern": null,
+                  "styleIntent": []
+                }
+              ],
+              "name": "Queue Workspace Layout",
+              "pattern": null,
+              "styleIntent": []
+            },
+            "title": "Intake Queue"
+          },
+          "screenId": "intake_queue",
+          "slotRole": null,
+          "style": {
+            "effective_intent": [
+              "prioritized",
+              "actionable",
+              "queue_focused"
+            ],
+            "sources": [
+              {
+                "id": "region_work_queue",
+                "intent": [
+                  "prioritized",
+                  "actionable",
+                  "queue_focused"
+                ],
+                "scope": "region"
+              }
+            ]
+          },
+          "styleIntent": [
+            "prioritized",
+            "actionable",
+            "queue_focused"
+          ],
+          "widgetId": "widget_data_grid"
+        }
+      }
+    ],
+    "type": "ui_agent_packet",
+    "version": 1,
+    "widget": {
+      "behaviors": [
+        {
+          "directives": {
+            "emits": "row_select",
+            "mode": "single",
+            "state": "selected_ids"
+          },
+          "kind": "selection",
+          "source": "structured"
+        },
+        {
+          "directives": {
+            "default": [
+              "priority",
+              "asc"
+            ],
+            "fields": [
+              "priority",
+              "status",
+              "sla_minutes"
+            ]
+          },
+          "kind": "sorting",
+          "source": "structured"
+        },
+        {
+          "directives": {
+            "fields": [
+              "priority",
+              "status",
+              "team",
+              "assignee_id",
+              "location"
+            ]
+          },
+          "kind": "filtering",
+          "source": "structured"
+        },
+        {
+          "directives": {
+            "scope": "collection",
+            "shortcuts": [
+              "enter",
+              "open",
+              "escape",
+              "clear"
+            ]
+          },
+          "kind": "keyboard_navigation",
+          "source": "structured"
+        }
+      ],
+      "category": "collection",
+      "id": "widget_data_grid",
+      "name": "Data Grid",
+      "patterns": [
+        "resource_table",
+        "data_grid_view"
+      ],
+      "regions": [
+        "results"
+      ]
+    }
+  },
+  "verification": [],
+  "verification_targets": {
+    "generated_checks": [
+      "compile-check"
+    ],
+    "maintained_app_checks": [],
+    "rationale": "Widget changes affect every related surface, so verification should follow the widget contract closure.",
+    "verification_ids": []
+  },
+  "version": 1,
+  "write_scope": {
+    "generator_owned": [
+      "artifacts/**",
+      "apps/**"
+    ],
+    "human_owned_review_required": [
+      "examples/maintained/proof-app/**"
+    ],
+    "out_of_bounds": [
+      ".git/**",
+      "node_modules/**"
+    ],
+    "safe_to_edit": [
+      "topo/**",
+      "candidates/**"
+    ]
+  }
+}

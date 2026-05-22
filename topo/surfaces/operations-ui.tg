@@ -1,0 +1,192 @@
+surface surface_operations_ui {
+  name "Operations Semantic UI"
+  description "Platform-neutral UI work map for the operations proof."
+
+  type semantic_ui
+  realizes [
+    cap_list_intake_items,
+    cap_view_incident_detail,
+    cap_view_reviewer_workload_hints,
+    cap_bulk_assign_incidents,
+    cap_change_incident_status,
+    cap_view_assignment_board,
+    cap_view_schedule,
+    cap_acknowledge_alert
+  ]
+  outputs [semantic_ui]
+
+  app_shell {
+    brand "Operations Control Room"
+    shell workspace
+    primary_nav true
+    global_search false
+    notifications true
+    account_menu false
+    windowing single_window
+  }
+
+  design_tokens {
+    density compact
+    tone operational
+    radius_scale medium
+    color_role primary accent
+    color_role danger critical
+    color_role warning attention
+    typography_role body readable
+    typography_role heading prominent
+    action_role primary prominent
+    action_role destructive danger
+    accessibility contrast aa
+    accessibility focus visible
+  }
+
+  messages {
+    locale default "en-US" fallback "en-US" direction ltr supported ["en-US"]
+    message msg_operations_dashboard_title key "operations.dashboard.title" default "Operations Dashboard" context screen_title screen operations_dashboard
+    message msg_intake_queue_title key "operations.intake.title" default "Intake Queue" context screen_title screen intake_queue
+    message msg_incident_detail_title key "operations.incident.title" default "Incident Detail" context screen_title screen incident_detail
+    message msg_assignment_board_title key "operations.assignments.title" default "Assignment Board" context screen_title screen assignment_board
+    message msg_schedule_title key "operations.schedule.title" default "Schedule" context screen_title screen schedule
+    message msg_settings_title key "operations.settings.title" default "Settings" context screen_title screen settings
+
+    message msg_intake_empty_title key "operations.intake.empty.title" default "No intake work" context screen_empty_title screen intake_queue
+    message msg_intake_empty_body key "operations.intake.empty.body" default "Incoming work that needs triage appears here." context screen_empty_body screen intake_queue
+
+    message msg_widget_data_grid_label key "operations.widgets.data_grid.label" default "Incident table" context widget_label widget widget_data_grid
+    message msg_widget_filter_panel_label key "operations.widgets.filter_panel.label" default "Incident filters" context widget_label widget widget_filter_panel
+    message msg_widget_command_toolbar_label key "operations.widgets.command_toolbar.label" default "Screen commands" context widget_label widget widget_command_toolbar
+    message msg_widget_workload_hint_label key "operations.widgets.workload_hints.label" default "Reviewer workload hints" context widget_label widget widget_workload_hint_panel
+    message msg_widget_kpi_summary_cards_label key "operations.widgets.kpi_cards.label" default "Operations summary cards" context widget_label widget widget_kpi_summary_cards
+    message msg_widget_detail_panel_label key "operations.widgets.detail_panel.label" default "Incident detail" context widget_label widget widget_detail_panel
+    message msg_widget_status_board_label key "operations.widgets.status_board.label" default "Assignment status board" context widget_label widget widget_status_board
+    message msg_widget_timeline_label key "operations.widgets.timeline.label" default "Incident timeline" context widget_label widget widget_activity_timeline
+    message msg_widget_schedule_label key "operations.widgets.schedule.label" default "Schedule calendar" context widget_label widget widget_schedule_calendar
+    message msg_widget_alert_label key "operations.widgets.alert.label" default "Live alerts" context widget_label widget widget_alert_banner
+    message msg_widget_settings_label key "operations.widgets.settings.label" default "Settings panel" context widget_label widget widget_settings_panel
+
+    message msg_action_bulk_assign_label key "operations.actions.bulk_assign" default "Bulk assign incidents" context action_label action cap_bulk_assign_incidents
+    message msg_action_change_status_label key "operations.actions.change_status" default "Change incident status" context action_label action cap_change_incident_status
+    message msg_action_acknowledge_alert_label key "operations.actions.acknowledge_alert" default "Acknowledge alert" context action_label action cap_acknowledge_alert
+  }
+
+  accessibility {
+    screen operations_dashboard role main name_from message msg_operations_dashboard_title keyboard standard focus visible live off
+    screen intake_queue role main name_from message msg_intake_queue_title keyboard standard focus visible live off
+    screen incident_detail role main name_from message msg_incident_detail_title keyboard standard focus visible live off
+    screen assignment_board role main name_from message msg_assignment_board_title keyboard standard focus visible live off
+    screen schedule role main name_from message msg_schedule_title keyboard standard focus visible live off
+    screen settings role main name_from message msg_settings_title keyboard standard focus visible live off
+
+    widget widget_data_grid role grid name_from message msg_widget_data_grid_label keyboard data_grid focus roving_tabindex live off
+    widget widget_filter_panel role search name_from message msg_widget_filter_panel_label keyboard form focus visible live off
+    widget widget_command_toolbar role region name_from message msg_widget_command_toolbar_label keyboard standard focus visible live off
+    widget widget_workload_hint_panel role region name_from message msg_widget_workload_hint_label keyboard form focus visible live polite
+    widget widget_kpi_summary_cards role region name_from message msg_widget_kpi_summary_cards_label keyboard standard focus visible live off
+    widget widget_detail_panel role region name_from message msg_widget_detail_panel_label keyboard standard focus visible live off
+    widget widget_status_board role grid name_from message msg_widget_status_board_label keyboard roving_tabindex focus roving_tabindex live off
+    widget widget_activity_timeline role list name_from message msg_widget_timeline_label keyboard standard focus visible live off
+    widget widget_schedule_calendar role grid name_from message msg_widget_schedule_label keyboard arrow_keys focus roving_tabindex live off
+    widget widget_alert_banner role status name_from message msg_widget_alert_label keyboard standard focus visible live polite
+    widget widget_settings_panel role form name_from message msg_widget_settings_label keyboard form focus visible live off
+
+    action cap_bulk_assign_incidents role button name_from message msg_action_bulk_assign_label keyboard button focus visible live off
+    action cap_change_incident_status role button name_from message msg_action_change_status_label keyboard button focus visible live off
+    action cap_acknowledge_alert role button name_from message msg_action_acknowledge_alert_label keyboard button focus visible live off
+  }
+
+  screens {
+    screen operations_dashboard kind dashboard layout layout_dashboard_overview title "Operations Dashboard" load cap_list_intake_items item_shape shape_output_incident_row primary_action cap_acknowledge_alert loading_state skeleton error_state inline
+    screen intake_queue kind list layout layout_queue_workspace title "Intake Queue" load cap_list_intake_items item_shape shape_output_incident_row detail_capability cap_view_incident_detail primary_action cap_bulk_assign_incidents secondary_action cap_change_incident_status empty_title "No intake work" empty_body "Incoming work that needs triage appears here." loading_state skeleton error_state inline
+    screen incident_detail kind detail layout layout_incident_detail title "Incident Detail" load cap_view_incident_detail view_shape shape_output_incident_detail primary_action cap_change_incident_status secondary_action cap_bulk_assign_incidents loading_state skeleton error_state inline not_found_state inline
+    screen assignment_board kind board layout layout_assignment_board title "Assignment Board" load cap_view_assignment_board item_shape shape_output_incident_row detail_capability cap_view_incident_detail primary_action cap_bulk_assign_incidents loading_state skeleton error_state inline
+    screen schedule kind calendar layout layout_schedule_calendar title "Schedule" load cap_view_schedule item_shape shape_output_shift_card loading_state skeleton error_state inline
+    screen settings kind settings layout layout_settings_page title "Settings" load cap_list_intake_items loading_state skeleton error_state inline
+  }
+
+  navigation {
+    group operations label "Operations" placement primary pattern navigation_rail
+    group admin label "Admin" placement secondary pattern navigation_rail
+    screen operations_dashboard group operations label "Dashboard" order 10 visible true default true sitemap include pattern navigation_rail
+    screen intake_queue group operations label "Intake" order 20 visible true sitemap include pattern navigation_rail
+    screen assignment_board group operations label "Assignments" order 30 visible true sitemap include pattern navigation_rail
+    screen schedule group operations label "Schedule" order 40 visible true sitemap include pattern navigation_rail
+    screen incident_detail group operations label "Incident Detail" visible false breadcrumb intake_queue sitemap exclude pattern stack_navigation
+    screen settings group admin label "Settings" order 50 visible true sitemap include pattern navigation_rail
+  }
+
+  widget_bindings {
+    screen operations_dashboard region command_bar widget widget_command_toolbar data actions from cap_acknowledge_alert event primary_action action cap_acknowledge_alert
+    screen operations_dashboard region results widget widget_kpi_summary_cards data items from cap_list_intake_items event card_select navigate intake_queue
+    screen operations_dashboard region live_alerts widget widget_alert_banner data alerts from cap_acknowledge_alert event alert_select navigate incident_detail
+
+    screen intake_queue region command_bar widget widget_command_toolbar data actions from cap_bulk_assign_incidents event primary_action action cap_bulk_assign_incidents
+    screen intake_queue region filters widget widget_filter_panel data filters from cap_list_intake_items event filter_change action cap_list_intake_items
+    screen intake_queue region results widget widget_data_grid data rows from cap_list_intake_items event row_select navigate incident_detail
+    screen intake_queue region assignment_hints widget widget_workload_hint_panel data hints from cap_view_reviewer_workload_hints event assign action cap_bulk_assign_incidents
+
+    screen incident_detail region summary widget widget_detail_panel data item from cap_view_incident_detail event edit_requested action cap_change_incident_status
+    screen incident_detail region timeline widget widget_activity_timeline data timeline_items from cap_view_incident_detail
+    screen incident_detail region command_bar widget widget_command_toolbar data actions from cap_change_incident_status event primary_action action cap_change_incident_status
+
+    screen assignment_board region command_bar widget widget_command_toolbar data actions from cap_bulk_assign_incidents event primary_action action cap_bulk_assign_incidents
+    screen assignment_board region board widget widget_status_board data columns from cap_view_assignment_board event item_select navigate incident_detail
+
+    screen schedule region command_bar widget widget_command_toolbar data actions from cap_view_schedule event primary_action action cap_view_schedule
+    screen schedule region calendar widget widget_schedule_calendar data items from cap_view_schedule event item_select action cap_view_schedule
+
+    screen settings region summary widget widget_settings_panel data value from cap_list_intake_items event submit action cap_change_incident_status
+  }
+
+  status active
+}
+
+surface surface_operations_web_react {
+  name "Operations React Web Surface"
+  description "Maintained React route surface for the operations-dashboard proof."
+
+  type web
+  realizes [
+    surface_operations_ui,
+    cap_view_reviewer_workload_hints,
+    cap_list_intake_items,
+    cap_view_incident_detail,
+    cap_bulk_assign_incidents,
+    cap_change_incident_status,
+    cap_view_assignment_board,
+    cap_view_schedule,
+    cap_acknowledge_alert
+  ]
+  outputs [semantic_ui, web_app]
+
+  screen_routes {
+    screen operations_dashboard path /
+    screen intake_queue path /intake
+    screen incident_detail path /incidents/:incidentId
+    screen assignment_board path /assignments
+    screen schedule path /schedule
+    screen settings path /settings
+  }
+
+  web_hints {
+    screen operations_dashboard shell workspace
+    screen operations_dashboard layout dashboard_overview
+    screen intake_queue layout queue_workspace
+    screen intake_queue desktop_variant table
+    screen intake_queue mobile_variant cards
+    screen incident_detail layout split_view
+    screen assignment_board layout board
+    screen schedule layout calendar
+    screen settings layout settings
+    action cap_bulk_assign_incidents present button
+    action cap_change_incident_status present button
+    action cap_acknowledge_alert present button
+  }
+
+  generator_defaults {
+    profile react
+    language typescript
+    styling css
+  }
+
+  status active
+}

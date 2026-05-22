@@ -1,0 +1,7 @@
+acceptance_criterion ac_operations_design_component_map_reports {
+  name "Operations Design Component Map Reports"
+  description "Given operations widgets have design_language and component_map records, when Topogram design coverage, realization report, and focused slices are emitted, then mapped, contract-only, implementation-owned, unsupported, missing-state, i18n, and accessibility review work is visible as proof artifacts."
+  requirement req_operations_design_component_map
+  status approved
+}
+

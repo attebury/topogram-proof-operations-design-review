@@ -1,0 +1,13 @@
+requirement req_slice_guided_bulk_assignment_feature {
+  name "Slice Guided Bulk Assignment Feature"
+  description "The proof repo should demonstrate a maintained React UI feature implemented from focused Topogram slices, with Topogram records updated first and the app then aligned to those records."
+  pitch pitch_operations_ui_work_map_proof
+  affects [cap_list_intake_items, cap_view_reviewer_workload_hints, cap_bulk_assign_incidents, cap_query_context]
+  introduces_rules []
+  respects_rules [rule_tests_prove_consumer_value, rule_agents_start_with_focused_context]
+  related_terms [term_operations_control_room, term_intake_queue]
+  domain dom_operations_ui_work_map
+  priority high
+  status approved
+}
+

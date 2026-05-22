@@ -1,0 +1,12 @@
+requirement req_operations_domain_model {
+  name "Operations Domain Model"
+  description "The proof repo should model mock operations entities, shapes, and capabilities in Topogram before UI layout and design records are added."
+  pitch pitch_operations_ui_work_map_proof
+  affects [cap_list_intake_items, cap_view_incident_detail, cap_view_assignment_board, cap_query_context]
+  introduces_rules []
+  respects_rules [rule_tests_prove_consumer_value, rule_agents_start_with_focused_context]
+  related_terms [term_operations_control_room, term_incident, term_mock_capability]
+  domain dom_operations_ui_work_map
+  priority high
+  status approved
+}

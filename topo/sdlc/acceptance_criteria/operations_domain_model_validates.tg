@@ -1,0 +1,6 @@
+acceptance_criterion ac_operations_domain_model_validates {
+  name "Operations Domain Model Validates"
+  description "Given the proof repo has no DB or API runtime, when Topogram validates the workspace, then mock operations entities, shapes, capabilities, glossary terms, and SDLC records resolve successfully and the React baseline still builds."
+  requirement req_operations_domain_model
+  status approved
+}

@@ -1,0 +1,110 @@
+entity entity_incident {
+  name "Incident"
+  description "Operational work item shown in the intake queue, detail page, assignment board, schedule, and alert context."
+
+  fields {
+    id text required
+    title string required
+    priority incident_priority required default medium
+    status incident_status required default new
+    team string required
+    assignee_id text optional
+    submitted_at text required
+    location string required
+    summary text required
+    sla_minutes integer required
+    tags text optional
+  }
+
+  keys {
+    primary [id]
+    index [priority, status]
+    index [assignee_id, status]
+  }
+
+  invariants {
+    title length <= 160
+    sla_minutes >= 0
+    status == assigned implies assignee_id is required
+  }
+
+  status active
+}
+
+entity entity_assignee {
+  name "Assignee"
+  description "Person or queue that can own active incidents in the operations dashboard."
+
+  fields {
+    id text required
+    name string required
+    role string required
+    capacity string required
+  }
+
+  keys {
+    primary [id]
+  }
+
+  status active
+}
+
+entity entity_shift {
+  name "Shift"
+  description "Field or operations coverage window visible in the schedule screen."
+
+  fields {
+    id text required
+    team string required
+    window string required
+    coverage text required
+  }
+
+  keys {
+    primary [id]
+  }
+
+  status active
+}
+
+entity entity_alert {
+  name "Alert"
+  description "Live operations signal that may require acknowledgement or review."
+
+  fields {
+    id text required
+    title string required
+    severity string required
+    summary text required
+  }
+
+  keys {
+    primary [id]
+  }
+
+  status active
+}
+
+entity entity_status_update {
+  name "Status Update"
+  description "Timeline event attached to an incident."
+
+  fields {
+    id text required
+    incident_id text required
+    time string required
+    label string required
+    note text required
+  }
+
+  keys {
+    primary [id]
+    index [incident_id]
+  }
+
+  relations {
+    incident_id references entity_incident.id
+  }
+
+  status active
+}

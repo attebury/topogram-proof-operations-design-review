@@ -1,0 +1,11 @@
+domain dom_operations_control_room {
+  name "Operations Control Room"
+  description "Intake, triage, assignment, incident review, schedule awareness, and alert handling for the mock operations dashboard."
+  status active
+}
+
+domain dom_operations_ui_work_map {
+  name "Operations UI Work Map"
+  description "Topogram UI records that explain where operations dashboard UI work belongs before React or SvelteKit code is changed."
+  status active
+}

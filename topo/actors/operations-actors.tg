@@ -1,0 +1,17 @@
+actor actor_operations_lead {
+  name "Operations Lead"
+  description "Human responsible for triage, assignment, and incident resolution decisions in the operations control room."
+  status active
+}
+
+actor actor_field_coordinator {
+  name "Field Coordinator"
+  description "Human responsible for dispatch, shift coverage, and field-team status updates."
+  status active
+}
+
+actor actor_ui_agent {
+  name "UI Coding Agent"
+  description "Agent using Topogram slices to make bounded UI changes to the operations dashboard."
+  status active
+}

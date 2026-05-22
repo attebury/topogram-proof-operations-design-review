@@ -1,0 +1,172 @@
+layout layout_standard_app_shell {
+  name "Standard App Shell"
+  description "Persistent operations app shell with header, global navigation, and a primary content slot."
+  app_shell workspace
+  platforms [web ios android]
+  viewports [wide narrow]
+  domain dom_operations_ui_work_map
+  status active
+
+  slot {
+    id header
+    uses region_app_header
+  }
+
+  slot {
+    id nav
+    uses region_global_navigation
+  }
+
+  slot {
+    id content
+    uses region_work_queue
+    slot true
+  }
+}
+
+layout layout_dashboard_overview {
+  name "Dashboard Overview Layout"
+  description "Overview layout with command access, KPI/results content, and live alerts."
+  parent layout_standard_app_shell
+  fills content
+  platforms [web ios android]
+  viewports [wide narrow]
+  domain dom_operations_ui_work_map
+  status active
+
+  slot {
+    id command_bar
+    uses region_command_bar
+  }
+
+  slot {
+    id results
+    uses region_dashboard_summary
+    slot true
+  }
+
+  slot {
+    id live_alerts
+    uses region_live_alerts
+  }
+}
+
+layout layout_queue_workspace {
+  name "Queue Workspace Layout"
+  description "Queue workspace with command bar, filter panel, and prioritized work queue."
+  parent layout_standard_app_shell
+  fills content
+  platforms [web ios android]
+  viewports [wide narrow]
+  domain dom_operations_ui_work_map
+  status active
+
+  slot {
+    id command_bar
+    uses region_command_bar
+  }
+
+  slot {
+    id filters
+    uses region_filter_panel
+  }
+
+  slot {
+    id results
+    uses region_work_queue
+    slot true
+  }
+
+  slot {
+    id assignment_hints
+    uses region_assignment_hints
+  }
+}
+
+layout layout_incident_detail {
+  name "Incident Detail Layout"
+  description "Split detail layout with summary, timeline, and terminal actions."
+  parent layout_standard_app_shell
+  fills content
+  platforms [web ios android]
+  viewports [wide narrow]
+  domain dom_operations_ui_work_map
+  status active
+
+  slot {
+    id summary
+    uses region_detail_summary
+    slot true
+  }
+
+  slot {
+    id timeline
+    uses region_activity_timeline
+  }
+
+  slot {
+    id command_bar
+    uses region_command_bar
+  }
+}
+
+layout layout_assignment_board {
+  name "Assignment Board Layout"
+  description "Board workspace for workload review and assignment planning."
+  parent layout_standard_app_shell
+  fills content
+  platforms [web ios android]
+  viewports [wide narrow]
+  domain dom_operations_ui_work_map
+  status active
+
+  slot {
+    id command_bar
+    uses region_command_bar
+  }
+
+  slot {
+    id board
+    uses region_assignment_board
+    slot true
+  }
+}
+
+layout layout_schedule_calendar {
+  name "Schedule Calendar Layout"
+  description "Calendar workspace for field schedule and shift coverage review."
+  parent layout_standard_app_shell
+  fills content
+  platforms [web ios android]
+  viewports [wide narrow]
+  domain dom_operations_ui_work_map
+  status active
+
+  slot {
+    id command_bar
+    uses region_command_bar
+  }
+
+  slot {
+    id calendar
+    uses region_schedule_calendar
+    slot true
+  }
+}
+
+layout layout_settings_page {
+  name "Settings Page Layout"
+  description "Settings workspace for operations display preferences and alert behavior."
+  parent layout_standard_app_shell
+  fills content
+  platforms [web ios android]
+  viewports [wide narrow]
+  domain dom_operations_ui_work_map
+  status active
+
+  slot {
+    id summary
+    uses region_settings_panel
+    slot true
+  }
+}

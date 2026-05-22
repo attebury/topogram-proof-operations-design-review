@@ -1,0 +1,7 @@
+acceptance_criterion ac_maintained_react_ui_markers {
+  name "Maintained React UI Markers"
+  description "Given the maintained React app implements operations screens, when the app source is built and audited, then Topogram screen, region, widget, message, accessibility, design language, component-map, and component-ref markers are present in source and build output."
+  requirement req_maintained_react_ui_alignment
+  status approved
+}
+
