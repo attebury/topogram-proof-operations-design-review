@@ -1,19 +1,19 @@
-# Step 03: Design Language And Component Map
+# Step 04: Designer Report Packet
 
-> Add design-language tokens, style intent, stable component refs, and explicit review rows.
+> Package the work map into a designer-readable Markdown packet with drill-down JSON artifacts.
 
 Status: current
 
 Audience: designers, front-end leads, and coding agents.
 
-Use when: reviewing how a designer/front-end lead maps the semantic work map to Acme Operations UI components.
+Use when: reviewing the product-facing packet a designer or front-end lead would read first.
 
 ## What Changed
 
-- Added `design_language design_operations_product_ui` for platform scope, token mappings, and Acme Operations UI identity.
-- Added `component_map component_map_operations_widgets` with widget mappings across web, iOS, and Android.
-- Included rendered, contract-only, implementation-owned, unsupported, missing-platform, missing-state, style-ref, token, a11y, and i18n review cases.
-- Captured design coverage, realization report, work-map report, and widget slice artifacts.
+- Emitted `work-map.md` as the main designer review packet.
+- Captured design coverage Markdown/JSON, UI realization JSON, and compact screen/widget slices.
+- Verified the packet shows screens, layouts, regions, widget bindings, component refs, style intent, token/a11y/i18n gaps, review rows, and exact agent handoff commands.
+- Kept `.tg` as the source of truth while making Markdown the first review surface.
 
 ## Proof
 

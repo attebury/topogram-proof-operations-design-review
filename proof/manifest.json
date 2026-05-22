@@ -1,10 +1,11 @@
 {
   "cliVersion": "0.3.117",
-  "currentStep": "proof-03-design-language-component-map",
+  "currentStep": "proof-04-designer-report-packet",
   "expectedTags": [
     "proof-01-react-component-system",
     "proof-02-semantic-work-map",
-    "proof-03-design-language-component-map"
+    "proof-03-design-language-component-map",
+    "proof-04-designer-report-packet"
   ],
   "expectations": {
     "noTopo": false,
@@ -69,6 +70,27 @@
     {
       "path": "proof/artifacts/step-03-design-language-component-map/widget-slice.md",
       "contains": ["Design Review", "widget_data_grid"]
+    },
+    {
+      "path": "proof/artifacts/step-04-designer-report-packet/designer-review-packet.md",
+      "contains": ["# Step 04 Designer Review Packet", "work-map.md", "design-coverage.md"]
+    },
+    {
+      "path": "proof/artifacts/step-04-designer-report-packet/work-map.md",
+      "contains": ["Designer Review Packet", "Screen Inventory", "Agent Handoff Commands"]
+    },
+    {
+      "path": "proof/artifacts/step-04-designer-report-packet/work-map.json",
+      "json": true,
+      "requiredKeys": ["type", "designer_review", "proof_commands"]
+    },
+    {
+      "path": "proof/artifacts/step-04-designer-report-packet/design-coverage.md",
+      "contains": ["# UI Design Coverage", "Design Matrix", "Review Work"]
+    },
+    {
+      "path": "proof/artifacts/step-04-designer-report-packet/screen-slice.md",
+      "contains": ["Agent Guidance", "UI Work Map", "Design Review"]
     }
   ]
 }
